@@ -4,19 +4,30 @@ function loadTask(projectId) {
     const projects = getTodoData();
     const tasksList = document.querySelector(".main-tasks")
     const selectedProject = projects.find(project => project.id === projectId);
-    
-    tasksList.innerHTML = "";
-    
-  if (!selectedProject) {
+    return selectedProject || null;
+} 
+
+function loadTaskDOM(project) {
+  const tasksList = document.querySelector(".main-tasks");
+  tasksList.innerHTML = "";
+
+  if (!project) {
     tasksList.textContent = "Project not found.";
     return;
   }
 
-    selectedProject.todos.forEach(task => {
+  project.todos.forEach(task => {
     const taskItem = document.createElement("li");
-    taskItem.textContent = task.title; // You can add more task details here
+    const taskTitle = document.createElement("h2")
+    const taskDate = document.createElement("p")
+    const taskPriority = document.createElement("p")
+
+    taskTitle.textContent = task.title;
+    taskDate.textContent = task.dueDate;
+    taskPriority.textContent = task.priority;
+    taskItem.append(taskTitle, taskDate, taskPriority)
     tasksList.appendChild(taskItem);
   });
-} 
+}
 
-export { loadTask }
+export { loadTask, loadTaskDOM }
