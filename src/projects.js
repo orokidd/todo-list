@@ -1,4 +1,4 @@
-import getTodoData from "./todoData";
+import { getTodoData } from "./todoData";
 
 function projectSideBar() {
     const projects = getTodoData();

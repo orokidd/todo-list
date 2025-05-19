@@ -1,4 +1,4 @@
-import getTodoData from "./todoData";
+import { getTodoData } from "./todoData.js";
 
 function loadTask(projectId) {
     const projects = getTodoData();
@@ -10,6 +10,10 @@ function loadTask(projectId) {
 function loadTaskDOM(project) {
   const tasksList = document.querySelector(".main-tasks");
   tasksList.innerHTML = "";
+
+  const projectName = document.createElement("h1")
+  projectName.textContent = project.name;
+  tasksList.appendChild(projectName)
 
   if (!project) {
     tasksList.textContent = "Project not found.";
