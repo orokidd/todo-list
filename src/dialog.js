@@ -1,12 +1,14 @@
 import { getCurrentProject } from "./state.js";
 import { newProject, newTodo, getTodoData } from "./todoData.js";
 import { projectSideBar } from "./projects.js";
+import { loadTask, loadTaskDOM } from "./loadTasks.js";
 
 function initAddTodoDialog() {
   const dialog = document.getElementById("todoDialog");
   const openBtn = document.getElementById("newTodoBtn");
   const cancelBtn = document.getElementById("cancelTodo");
   const form = document.getElementById("todoForm");
+  
 
   openBtn.addEventListener("click", () => {
     dialog.showModal();
@@ -25,6 +27,7 @@ function initAddTodoDialog() {
       (project) => project.id === currentProjectId
     );
     const currentTodos = todoData[projectIndex].todos;
+    const project = loadTask(currentProjectId);
 
     const task = {
       id: `t${currentTodos.length + 1}`,
@@ -37,6 +40,7 @@ function initAddTodoDialog() {
     console.log("Task submitted:", task);
 
     newTodo(currentProjectId, task);
+    loadTaskDOM(project);
     dialog.close();
     form.reset();
   });
