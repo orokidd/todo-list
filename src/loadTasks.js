@@ -22,6 +22,7 @@ function loadTaskDOM(project) {
   project.todos.forEach((task) => {
     const taskItem = document.createElement("li");
     const taskTitle = document.createElement("h2")
+    const taskDescription = document.createElement("p")
     const taskDate = document.createElement("p")
     const taskPriority = document.createElement("p")
     const editTask = document.createElement("button")
@@ -29,6 +30,7 @@ function loadTaskDOM(project) {
 
     editTask.textContent = "Edit";
     deleteTask.textContent = "Delete";
+    taskDescription.textContent = task.desc
     taskTitle.textContent = task.title;
     taskDate.textContent = task.dueDate;
     taskPriority.textContent = task.priority;
@@ -38,7 +40,7 @@ function loadTaskDOM(project) {
       loadTaskDOM(project)
     })
       
-    taskItem.append(taskTitle, taskDate, taskPriority, editTask, deleteTask)
+    taskItem.append(taskTitle, taskDescription, taskDate, taskPriority, editTask, deleteTask)
     tasksList.appendChild(taskItem);
   });
 }

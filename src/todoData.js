@@ -8,10 +8,8 @@ const todoData = [
           title: "Buy groceries",
           desc: "Milk, eggs, bread",
           dueDate: "2025-05-20",
-          priority: "High",         // Low, Medium, High
-          status: false,            // false = not done
-          createdAt: "2025-05-18",
-          completedAt: null
+          priority: "High",        
+          status: false,            
         },
         {
           id: "t2",
@@ -20,8 +18,6 @@ const todoData = [
           dueDate: "2025-05-21",
           priority: "Low",
           status: true,
-          createdAt: "2025-05-18",
-          completedAt: "2025-05-18"
         }
       ]
     },
@@ -30,14 +26,12 @@ const todoData = [
       name: "Work",
       todos: [
         {
-          id: "t3",
+          id: "t1",
           title: "Submit report",
           desc: "Q2 Financials",
           dueDate: "2025-05-22",
           priority: "Medium",
           status: false,
-          createdAt: "2025-05-19",
-          completedAt: null
         }
       ]
     }
@@ -58,6 +52,12 @@ function deleteProject(projectId) {
   }
 }
 
+function newTodo(projectId, todo) {
+  const project = todoData.findIndex(project => project.id === projectId);
+  todoData[project].todos.push(todo)
+  console.log(todoData)
+}
+
 function deleteTodo(projectId, todoId) {
   const project = todoData.find(project => project.id === projectId);
   if (project) {
@@ -68,4 +68,4 @@ function deleteTodo(projectId, todoId) {
   }
 }
 
-export { getTodoData, newProject, deleteProject, deleteTodo };
+export { getTodoData, newProject, deleteProject, deleteTodo, newTodo };
