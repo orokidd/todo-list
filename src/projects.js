@@ -4,6 +4,8 @@ function projectSideBar() {
     const projects = getTodoData();
     const projectBar = document.querySelector(".projects-ul")
 
+    projectBar.innerHTML = ""
+
     projects.forEach(element => {
         const projectList = document.createElement("li")
         projectList.classList.add("project")
@@ -15,3 +17,5 @@ function projectSideBar() {
 }   
 
 projectSideBar()
+
+export { projectSideBar }

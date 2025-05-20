@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
 </head>
+
 <body>
-    
+
     <div class="wrapper">
 
         <div class="sidebar">
@@ -28,18 +30,31 @@
             <div class="top">
                 <div class="header-left">All Tasks</div>
                 <div class="header-actions">
-                    <button>New Project</button>
-                    <button>Add Todo</button>
+                    <button id="newProjectBtn">New Project</button>
+                    <button id="newTodoBtn">Add Todo</button>
                 </div>
             </div>
             <div class="tasks-wrapper">
                 <ul class="main-tasks">
-                    
+
                 </ul>
             </div>
         </div>
 
+        <dialog id="newProjectDialog">
+            <form method="dialog">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" name="projectName" required>
+
+                <menu>
+                    <button type="submit" id="projectSubmitBtn">Submit</button>
+                    <button type="button" id="closeProjectBtn">Cancel</button>
+                </menu>
+            </form>
+        </dialog>
+
     </div>
 
 </body>
+
 </html>
