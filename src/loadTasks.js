@@ -1,4 +1,4 @@
-import { getTodoData } from "./todoData.js";
+import { getTodoData, deleteTodo } from "./todoData.js";
 
 function loadTask(projectId) {
     const projects = getTodoData();
@@ -19,16 +19,26 @@ function loadTaskDOM(project) {
     return;
   }
 
-  project.todos.forEach(task => {
+  project.todos.forEach((task) => {
     const taskItem = document.createElement("li");
     const taskTitle = document.createElement("h2")
     const taskDate = document.createElement("p")
     const taskPriority = document.createElement("p")
+    const editTask = document.createElement("button")
+    const deleteTask = document.createElement("button")
 
+    editTask.textContent = "Edit";
+    deleteTask.textContent = "Delete";
     taskTitle.textContent = task.title;
     taskDate.textContent = task.dueDate;
     taskPriority.textContent = task.priority;
-    taskItem.append(taskTitle, taskDate, taskPriority)
+
+    deleteTask.addEventListener('click', ()=> {
+      deleteTodo(project.id, task.id);
+      loadTaskDOM(project)
+    })
+      
+    taskItem.append(taskTitle, taskDate, taskPriority, editTask, deleteTask)
     tasksList.appendChild(taskItem);
   });
 }

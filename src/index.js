@@ -10,8 +10,8 @@ const closeBtn = document.getElementById("closeProjectBtn");
 
 projects.addEventListener("click", (e) => {
   if (e.target.classList.contains("project")) {
-    const task = loadTask(e.target.id);
-    loadTaskDOM(task);
+    const project = loadTask(e.target.id);
+    loadTaskDOM(project);
   }
 });
 
@@ -32,5 +32,4 @@ projectSubmitBtn.addEventListener("click", ()=> {
 
     newProject("p3", projectName)
     projectSideBar();
-    console.log(getTodoData())
 })
