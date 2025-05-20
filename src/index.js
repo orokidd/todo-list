@@ -3,16 +3,16 @@ import { projectSideBar } from "./projects.js";
 import { loadTask, loadTaskDOM } from "./loadTasks.js";
 import { newProject, getTodoData } from "./todoData.js";
 
-const projects = document.querySelectorAll(".project");
+const projects = document.querySelector(".projects-ul");
 const dialog = document.getElementById("newProjectDialog");
 const showBtn = document.getElementById("newProjectBtn");
 const closeBtn = document.getElementById("closeProjectBtn");
 
-projects.forEach((project) => {
-  project.addEventListener("click", () => {
-    const task = loadTask(project.id);
+projects.addEventListener("click", (e) => {
+  if (e.target.classList.contains("project")) {
+    const task = loadTask(e.target.id);
     loadTaskDOM(task);
-  });
+  }
 });
 
 showBtn.addEventListener("click", () => {

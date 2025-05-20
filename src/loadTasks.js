@@ -2,7 +2,6 @@ import { getTodoData } from "./todoData.js";
 
 function loadTask(projectId) {
     const projects = getTodoData();
-    const tasksList = document.querySelector(".main-tasks")
     const selectedProject = projects.find(project => project.id === projectId);
     return selectedProject || null;
 } 
