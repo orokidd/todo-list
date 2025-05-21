@@ -1,4 +1,5 @@
 let currentProjectId = null;
+let currentTodoId = null;
 
 function setCurrentProject(id) {
   currentProjectId = id;
@@ -9,4 +10,13 @@ function getCurrentProject() {
   return currentProjectId;
 }
 
-export { setCurrentProject, getCurrentProject }
+function setCurrentTodo(id) {
+  currentTodoId = id;
+  console.log(currentTodoId)
+}
+
+function getCurrentTodo() {
+  return currentTodoId;
+}
+
+export { setCurrentProject, getCurrentProject, setCurrentTodo, getCurrentTodo }

@@ -1,7 +1,7 @@
 import "./styles.css";
 import { loadTask, loadTaskDOM } from "./loadTasks.js";
 import { setCurrentProject } from "./state.js";
-import { initAddTodoDialog, initAddProjectDialog } from "./dialog.js";
+import { initAddProjectDialog, editEventListener } from "./dialog.js";
 
 const projects = document.querySelector(".projects-ul");
 
@@ -15,5 +15,6 @@ projects.addEventListener("click", (e) => {
 });
 
 
-initAddTodoDialog();
+// initAddTodoDialog();
 initAddProjectDialog();
+editEventListener();

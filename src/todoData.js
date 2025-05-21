@@ -14,7 +14,7 @@ const todoData = [
         {
           id: "t2",
           title: "Call mom",
-          desc: "",
+          desc: "Ay check it bro",
           dueDate: "2025-05-21",
           priority: "Low",
           status: true,
@@ -28,9 +28,25 @@ const todoData = [
         {
           id: "t1",
           title: "Submit report",
-          desc: "Q2 Financials",
-          dueDate: "2025-05-22",
+          desc: "Q1 Financials",
+          dueDate: "2025-04-22",
           priority: "Medium",
+          status: false,
+        },
+        {
+          id: "t2",
+          title: "Submit design",
+          desc: "Q2 Visual design",
+          dueDate: "2025-05-24",
+          priority: "Low",
+          status: false,
+        },
+        {
+          id: "t3",
+          title: "Submit assignment",
+          desc: "Q3 Midtterm",
+          dueDate: "2025-06-26",
+          priority: "High",
           status: false,
         }
       ]
@@ -58,6 +74,14 @@ function newTodo(projectId, todo) {
   console.log(todoData)
 }
 
+function editTodo(projectId, todoId, updatedTodo) {
+    const projectIndex = todoData.findIndex(project => project.id === projectId);
+    const todoIndex = todoData[projectIndex].todos.findIndex(todo => todo.id === todoId);
+
+    todoData[projectIndex].todos[todoIndex] = updatedTodo;
+    console.log(todoData)
+}
+
 function deleteTodo(projectId, todoId) {
   const project = todoData.find(project => project.id === projectId);
   if (project) {
@@ -68,4 +92,4 @@ function deleteTodo(projectId, todoId) {
   }
 }
 
-export { getTodoData, newProject, deleteProject, deleteTodo, newTodo };
+export { getTodoData, newProject, deleteProject, deleteTodo, newTodo, editTodo };
