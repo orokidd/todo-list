@@ -74,24 +74,34 @@ function editEventListener() {
   });
 
   form.addEventListener("submit", (e) => {
-    e.preventDefault(); // prevent default form close
+    e.preventDefault();
     const currentProjectId = getCurrentProject();
     const currentTodoId = getCurrentTodo();
     const currentFormMode = getCurrentForm();
 
-    const task = {
-      id: currentTodoId,
-      title: document.getElementById("taskTitle").value,
-      desc: document.getElementById("taskDescription").value,
-      dueDate: document.getElementById("taskDueDate").value,
-      priority: document.getElementById("taskPriority").value,
-    };
-
-    console.log("Task submitted:", task);
-
     if (currentFormMode === "edit") {
+      const task = {
+        id: currentTodoId,
+        title: document.getElementById("taskTitle").value,
+        desc: document.getElementById("taskDescription").value,
+        dueDate: document.getElementById("taskDueDate").value,
+        priority: document.getElementById("taskPriority").value,
+      };
       editTodo(currentProjectId, currentTodoId, task);
     } else {
+
+      const todoData = getTodoData();
+      const projectIndex = todoData.findIndex(
+        (project) => project.id === currentProjectId
+      );
+
+      const task = {
+        id: `t${todoData[projectIndex].todos.length + 1}`,
+        title: document.getElementById("taskTitle").value,
+        desc: document.getElementById("taskDescription").value,
+        dueDate: document.getElementById("taskDueDate").value,
+        priority: document.getElementById("taskPriority").value,
+      };
       newTodo(currentProjectId, task);
     }
     const project = loadTask(currentProjectId);
@@ -101,4 +111,9 @@ function editEventListener() {
   });
 }
 
-export { initAddProjectDialog, initEditTodoDialog, initAddTodoDialog, editEventListener };
+export {
+  initAddProjectDialog,
+  initEditTodoDialog,
+  initAddTodoDialog,
+  editEventListener,
+};
