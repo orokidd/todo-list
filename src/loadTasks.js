@@ -30,6 +30,12 @@ function loadTaskDOM(project) {
     const editTask = document.createElement("button");
     const deleteTask = document.createElement("button");
 
+    const taskDataContainer = document.createElement("div");
+    const taskOptionsContainer = document.createElement("div");
+
+    taskDataContainer.className = ("task-data")
+    taskOptionsContainer.className = ("task-actions")
+
     editTask.textContent = "Edit";
     deleteTask.textContent = "Delete";
     taskDescription.textContent = task.desc;
@@ -51,14 +57,16 @@ function loadTaskDOM(project) {
       loadTaskDOM(project);
     });
 
-    taskItem.append(
+    taskDataContainer.append(
       taskTitle,
       taskDescription,
       taskDate,
-      taskPriority,
-      editTask,
-      deleteTask
+      taskPriority
     );
+
+    taskOptionsContainer.append(editTask, deleteTask);
+
+    taskItem.append(taskDataContainer, taskOptionsContainer);
     tasksList.appendChild(taskItem);
   });
 }
