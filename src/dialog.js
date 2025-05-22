@@ -26,8 +26,10 @@ function initAddProjectDialog() {
   projectSubmitBtn.addEventListener("click", () => {
     const projectInput = document.querySelector("#projectName");
     const projectName = projectInput.value;
+    const todoData = getTodoData();
+    const newProjectId = `p${todoData.length + 1}`;
 
-    newProject("p3", projectName);
+    newProject(newProjectId, projectName);
     projectSideBar();
   });
 }
