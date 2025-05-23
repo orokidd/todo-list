@@ -1,21 +1,29 @@
 import { getTodoData } from "./todoData";
+import { loadAllTask } from "./loadTasks";
 
 function projectSideBar() {
-    const projects = getTodoData();
-    const projectBar = document.querySelector(".projects-ul")
+  const projects = getTodoData();
+  const projectBar = document.querySelector(".projects-ul");
 
-    projectBar.innerHTML = ""
+  projectBar.innerHTML = "";
 
-    projects.forEach(element => {
-        const projectList = document.createElement("li")
-        projectList.classList.add("project")
-        projectList.id = element.id
-        projectList.textContent = element.name
+  projects.forEach((element) => {
+    const projectList = document.createElement("li");
+    projectList.classList.add("project");
+    projectList.id = element.id;
+    projectList.textContent = element.name;
 
-        projectBar.appendChild(projectList)
-    });
-}   
+    projectBar.appendChild(projectList);
+  });
+}
 
-projectSideBar()
+function sideAllTask() {
+  const allTaskBtn = document.querySelector("#all-task-btn");
 
-export { projectSideBar }
+  allTaskBtn.addEventListener("click", loadAllTask);
+}
+
+projectSideBar();
+sideAllTask();
+
+export { projectSideBar };
