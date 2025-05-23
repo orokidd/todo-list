@@ -1,5 +1,5 @@
 import "./styles.css";
-import { loadTask, loadTaskDOM } from "./loadTasks.js";
+import { loadTask, loadTaskDOM, showAddTaskButton } from "./loadTasks.js";
 import { setCurrentProject } from "./state.js";
 import { initAddProjectDialog, initAddTodoDialog, editEventListener } from "./dialog.js";
 
@@ -12,6 +12,7 @@ projects.addEventListener("click", (e) => {
     const project = loadTask(projectId);
     loadTaskDOM(project);
     setCurrentProject(projectId);
+    showAddTaskButton()
   }
 });
 

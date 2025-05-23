@@ -112,6 +112,10 @@ body {
   background-color: #2980b9;
 }
 
+.header-actions #newTodoBtn {
+  display: none;
+}
+
 .tasks-wrapper {
   padding: 10px;
   background-color: #f8f9fa;

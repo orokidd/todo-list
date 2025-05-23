@@ -71,4 +71,9 @@ function loadTaskDOM(project) {
   });
 }
 
-export { loadTask, loadTaskDOM };
+function showAddTaskButton() {
+  const addTaskBtn = document.querySelector("#newTodoBtn")
+  addTaskBtn.style.display = 'inline';
+}
+
+export { loadTask, loadTaskDOM, showAddTaskButton };
