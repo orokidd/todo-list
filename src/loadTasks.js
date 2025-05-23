@@ -111,7 +111,7 @@ function loadAllTask() {
 
       deleteTask.addEventListener("click", () => {
         deleteTodo(project.id, task.id);
-        loadTaskDOM(project);
+        loadAllTask();
       });
 
       taskDataContainer.append(
