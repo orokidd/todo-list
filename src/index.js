@@ -1,7 +1,8 @@
 import "./styles.css";
-import { loadTask, loadTaskDOM, showAddTaskButton } from "./loadTasks.js";
+import { loadTask, loadTaskDOM } from "./loadTasks.js";
 import { setCurrentProject } from "./state.js";
 import { initAddProjectDialog, initAddTodoDialog, editEventListener } from "./dialog.js";
+import { showAddTaskButton } from "./projects.js";
 
 const projects = document.querySelector(".projects-ul");
 const addNewTodoBtn = document.querySelector("#newTodoBtn")

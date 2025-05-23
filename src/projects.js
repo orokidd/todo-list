@@ -20,10 +20,23 @@ function projectSideBar() {
 function sideAllTask() {
   const allTaskBtn = document.querySelector("#all-task-btn");
 
-  allTaskBtn.addEventListener("click", loadAllTask);
+  allTaskBtn.addEventListener("click", () => {
+    loadAllTask();
+    hideAddTaskButton();
+  });
+}
+
+function showAddTaskButton() {
+  const addTaskBtn = document.querySelector("#newTodoBtn");
+  addTaskBtn.style.display = "inline";
+}
+
+function hideAddTaskButton() {
+  const addTaskBtn = document.querySelector("#newTodoBtn");
+  addTaskBtn.style.display = "none";
 }
 
 projectSideBar();
 sideAllTask();
 
-export { projectSideBar };
+export { projectSideBar, showAddTaskButton };

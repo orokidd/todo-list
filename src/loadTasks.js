@@ -40,7 +40,7 @@ function loadTaskDOM(project) {
     deleteTask.textContent = "Delete";
     taskDescription.textContent = task.desc;
     taskTitle.textContent = task.title;
-    taskDate.textContent = task.dueDate;
+    taskDate.textContent = `Due: ${task.dueDate}`;
     taskPriority.textContent = task.priority;
 
     editTask.id = "edit-task-button";
@@ -97,7 +97,7 @@ function loadAllTask() {
       deleteTask.textContent = "Delete";
       taskDescription.textContent = task.desc;
       taskTitle.textContent = task.title;
-      taskDate.textContent = task.dueDate;
+      taskDate.textContent = `Due: ${task.dueDate}`;
       taskPriority.textContent = task.priority;
 
       editTask.id = "edit-task-button";
@@ -129,9 +129,4 @@ function loadAllTask() {
   });
 }
 
-function showAddTaskButton() {
-  const addTaskBtn = document.querySelector("#newTodoBtn");
-  addTaskBtn.style.display = "inline";
-}
-
-export { loadTask, loadTaskDOM, loadAllTask, showAddTaskButton };
+export { loadTask, loadTaskDOM, loadAllTask };
