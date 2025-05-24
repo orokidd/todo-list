@@ -195,4 +195,70 @@ function loadTodayTask() {
   });
 }
 
-export { loadTask, loadSelectedTask, loadAllTask, loadTodayTask };
+function loadUpcomingTask() {
+  const tasksList = document.querySelector(".main-tasks");
+  tasksList.innerHTML = "";
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const projects = getTodoData();
+
+  projects.forEach((project) => {
+    project.todos.forEach((task) => {
+
+      const taskDueDate = new Date(task.dueDate);
+      taskDueDate.setHours(0, 0, 0, 0);
+       if (taskDueDate.getTime() === today.getTime()) return;
+
+      const taskItem = document.createElement("li");
+      const taskTitle = document.createElement("h2");
+      const taskDescription = document.createElement("p");
+      const taskDate = document.createElement("p");
+      const taskPriority = document.createElement("p");
+      const editTask = document.createElement("button");
+      const deleteTask = document.createElement("button");
+
+      const taskDataContainer = document.createElement("div");
+      const taskOptionsContainer = document.createElement("div");
+
+      taskDataContainer.className = "task-data";
+      taskOptionsContainer.className = "task-actions";
+
+      editTask.textContent = "Edit";
+      deleteTask.textContent = "Delete";
+      taskDescription.textContent = task.desc;
+      taskTitle.textContent = task.title;
+      taskDate.textContent = `Due: ${task.dueDate}`;
+      taskPriority.textContent = task.priority;
+
+      editTask.id = "edit-task-button";
+      deleteTask.id = "delete-task-button";
+
+      editTask.addEventListener("click", () => {
+        initEditTodoDialog(project.id, task.id);
+        setCurrentTodo(task.id);
+        // loadTaskDOM(project);
+      });
+
+      deleteTask.addEventListener("click", () => {
+        deleteTodo(project.id, task.id);
+        loadAllTask();
+      });
+
+      taskDataContainer.append(
+        taskTitle,
+        taskDescription,
+        taskDate,
+        taskPriority
+      );
+
+      taskOptionsContainer.append(editTask, deleteTask);
+
+      taskItem.append(taskDataContainer, taskOptionsContainer);
+      tasksList.appendChild(taskItem);
+    });
+  });
+}
+
+export { loadTask, loadSelectedTask, loadAllTask, loadTodayTask, loadUpcomingTask };
