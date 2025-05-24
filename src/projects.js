@@ -1,5 +1,5 @@
 import { getTodoData } from "./todoData";
-import { loadAllTask } from "./loadTasks";
+import { loadAllTask, loadTodayTask } from "./loadTasks";
 
 function projectSideBar() {
   const projects = getTodoData();
@@ -26,6 +26,15 @@ function sideAllTask() {
   });
 }
 
+function sideTodayTask() {
+  const todayTaskBtn = document.querySelector("#today-task-btn");
+
+  todayTaskBtn.addEventListener("click", () => {
+    loadTodayTask();
+    hideAddTaskButton();
+  });
+}
+
 function showAddTaskButton() {
   const addTaskBtn = document.querySelector("#newTodoBtn");
   addTaskBtn.style.display = "inline";
@@ -38,5 +47,6 @@ function hideAddTaskButton() {
 
 projectSideBar();
 sideAllTask();
+sideTodayTask();
 
 export { projectSideBar, showAddTaskButton };

@@ -1,5 +1,5 @@
 import "./styles.css";
-import { loadTask, loadTaskDOM } from "./loadTasks.js";
+import { loadTask, loadSelectedTask } from "./loadTasks.js";
 import { setCurrentProject } from "./state.js";
 import { initAddProjectDialog, initAddTodoDialog, editEventListener } from "./dialog.js";
 import { showAddTaskButton } from "./projects.js";
@@ -11,7 +11,7 @@ projects.addEventListener("click", (e) => {
   if (e.target.classList.contains("project")) {
     const projectId = e.target.id;
     const project = loadTask(projectId);
-    loadTaskDOM(project);
+    loadSelectedTask(project);
     setCurrentProject(projectId);
     showAddTaskButton()
   }
