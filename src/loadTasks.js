@@ -29,10 +29,15 @@ function loadSelectedTask(project) {
     const taskPriority = document.createElement("p");
     const editTask = document.createElement("button");
     const deleteTask = document.createElement("button");
+    const checkbox = document.createElement("input");
 
     const taskDataContainer = document.createElement("div");
     const taskOptionsContainer = document.createElement("div");
 
+    checkbox.type = "checkbox";
+    checkbox.checked = task.status;
+
+    taskItem.className = task.status ? "completed" : "";
     taskDataContainer.className = "task-data";
     taskOptionsContainer.className = "task-actions";
 
@@ -46,10 +51,14 @@ function loadSelectedTask(project) {
     editTask.id = "edit-task-button";
     deleteTask.id = "delete-task-button";
 
+    checkbox.addEventListener("change", () => {
+      task.status = checkbox.checked;
+      taskItem.className = task.status ? "completed" : "";
+    });
+
     editTask.addEventListener("click", () => {
       initEditTodoDialog(project.id, task.id);
       setCurrentTodo(task.id);
-      // loadTaskDOM(project);
     });
 
     deleteTask.addEventListener("click", () => {
@@ -64,7 +73,7 @@ function loadSelectedTask(project) {
       taskPriority
     );
 
-    taskOptionsContainer.append(editTask, deleteTask);
+    taskOptionsContainer.append(checkbox, editTask, deleteTask);
 
     taskItem.append(taskDataContainer, taskOptionsContainer);
     tasksList.appendChild(taskItem);
@@ -106,7 +115,6 @@ function loadAllTask() {
       editTask.addEventListener("click", () => {
         initEditTodoDialog(project.id, task.id);
         setCurrentTodo(task.id);
-        // loadTaskDOM(project);
       });
 
       deleteTask.addEventListener("click", () => {
@@ -140,10 +148,9 @@ function loadTodayTask() {
 
   projects.forEach((project) => {
     project.todos.forEach((task) => {
-
       const taskDueDate = new Date(task.dueDate);
       taskDueDate.setHours(0, 0, 0, 0);
-       if (taskDueDate.getTime() !== today.getTime()) return;
+      if (taskDueDate.getTime() !== today.getTime()) return;
 
       const taskItem = document.createElement("li");
       const taskTitle = document.createElement("h2");
@@ -172,7 +179,6 @@ function loadTodayTask() {
       editTask.addEventListener("click", () => {
         initEditTodoDialog(project.id, task.id);
         setCurrentTodo(task.id);
-        // loadTaskDOM(project);
       });
 
       deleteTask.addEventListener("click", () => {
@@ -206,10 +212,9 @@ function loadUpcomingTask() {
 
   projects.forEach((project) => {
     project.todos.forEach((task) => {
-
       const taskDueDate = new Date(task.dueDate);
       taskDueDate.setHours(0, 0, 0, 0);
-       if (taskDueDate.getTime() === today.getTime()) return;
+      if (taskDueDate.getTime() === today.getTime()) return;
 
       const taskItem = document.createElement("li");
       const taskTitle = document.createElement("h2");
@@ -261,4 +266,10 @@ function loadUpcomingTask() {
   });
 }
 
-export { loadTask, loadSelectedTask, loadAllTask, loadTodayTask, loadUpcomingTask };
+export {
+  loadTask,
+  loadSelectedTask,
+  loadAllTask,
+  loadTodayTask,
+  loadUpcomingTask,
+};

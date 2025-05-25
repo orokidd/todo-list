@@ -148,6 +148,10 @@ body {
   flex-wrap: wrap; /* Optional: keeps things tidy on small screens */
 }
 
+.main-tasks li.completed {
+  filter: brightness(90%);
+}
+
 .task-info {
   display: flex;
   flex-direction: column;
