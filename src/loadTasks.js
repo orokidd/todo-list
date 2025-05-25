@@ -95,10 +95,15 @@ function loadAllTask() {
       const taskPriority = document.createElement("p");
       const editTask = document.createElement("button");
       const deleteTask = document.createElement("button");
+      const checkbox = document.createElement("input");
 
       const taskDataContainer = document.createElement("div");
       const taskOptionsContainer = document.createElement("div");
 
+      checkbox.type = "checkbox";
+      checkbox.checked = task.status;
+
+      taskItem.className = task.status ? "completed" : "";
       taskDataContainer.className = "task-data";
       taskOptionsContainer.className = "task-actions";
 
@@ -111,6 +116,11 @@ function loadAllTask() {
 
       editTask.id = "edit-task-button";
       deleteTask.id = "delete-task-button";
+
+      checkbox.addEventListener("change", () => {
+        task.status = checkbox.checked;
+        taskItem.className = task.status ? "completed" : "";
+      });
 
       editTask.addEventListener("click", () => {
         initEditTodoDialog(project.id, task.id);
@@ -129,7 +139,7 @@ function loadAllTask() {
         taskPriority
       );
 
-      taskOptionsContainer.append(editTask, deleteTask);
+      taskOptionsContainer.append(checkbox, editTask, deleteTask);
 
       taskItem.append(taskDataContainer, taskOptionsContainer);
       tasksList.appendChild(taskItem);
