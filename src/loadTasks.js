@@ -22,61 +22,7 @@ function loadSelectedTask(project) {
   }
 
   project.todos.forEach((task) => {
-    const taskItem = document.createElement("li");
-    const taskTitle = document.createElement("h2");
-    const taskDescription = document.createElement("p");
-    const taskDate = document.createElement("p");
-    const taskPriority = document.createElement("p");
-    const editTask = document.createElement("button");
-    const deleteTask = document.createElement("button");
-    const checkbox = document.createElement("input");
-
-    const taskDataContainer = document.createElement("div");
-    const taskOptionsContainer = document.createElement("div");
-
-    checkbox.type = "checkbox";
-    checkbox.checked = task.status;
-
-    taskItem.className = task.status ? "completed" : "";
-    taskDataContainer.className = "task-data";
-    taskOptionsContainer.className = "task-actions";
-
-    editTask.textContent = "Edit";
-    deleteTask.textContent = "Delete";
-    taskDescription.textContent = task.desc;
-    taskTitle.textContent = task.title;
-    taskDate.textContent = `Due: ${task.dueDate}`;
-    taskPriority.textContent = task.priority;
-
-    editTask.id = "edit-task-button";
-    deleteTask.id = "delete-task-button";
-
-    checkbox.addEventListener("change", () => {
-      task.status = checkbox.checked;
-      taskItem.className = task.status ? "completed" : "";
-    });
-
-    editTask.addEventListener("click", () => {
-      initEditTodoDialog(project.id, task.id);
-      setCurrentTodo(task.id);
-    });
-
-    deleteTask.addEventListener("click", () => {
-      deleteTodo(project.id, task.id);
-      loadSelectedTask(project);
-    });
-
-    taskDataContainer.append(
-      taskTitle,
-      taskDescription,
-      taskDate,
-      taskPriority
-    );
-
-    taskOptionsContainer.append(checkbox, editTask, deleteTask);
-
-    taskItem.append(taskDataContainer, taskOptionsContainer);
-    tasksList.appendChild(taskItem);
+    loadTaskDom(project, task, tasksList);
   });
 }
 
@@ -88,61 +34,7 @@ function loadAllTask() {
 
   projects.forEach((project) => {
     project.todos.forEach((task) => {
-      const taskItem = document.createElement("li");
-      const taskTitle = document.createElement("h2");
-      const taskDescription = document.createElement("p");
-      const taskDate = document.createElement("p");
-      const taskPriority = document.createElement("p");
-      const editTask = document.createElement("button");
-      const deleteTask = document.createElement("button");
-      const checkbox = document.createElement("input");
-
-      const taskDataContainer = document.createElement("div");
-      const taskOptionsContainer = document.createElement("div");
-
-      checkbox.type = "checkbox";
-      checkbox.checked = task.status;
-
-      taskItem.className = task.status ? "completed" : "";
-      taskDataContainer.className = "task-data";
-      taskOptionsContainer.className = "task-actions";
-
-      editTask.textContent = "Edit";
-      deleteTask.textContent = "Delete";
-      taskDescription.textContent = task.desc;
-      taskTitle.textContent = task.title;
-      taskDate.textContent = `Due: ${task.dueDate}`;
-      taskPriority.textContent = task.priority;
-
-      editTask.id = "edit-task-button";
-      deleteTask.id = "delete-task-button";
-
-      checkbox.addEventListener("change", () => {
-        task.status = checkbox.checked;
-        taskItem.className = task.status ? "completed" : "";
-      });
-
-      editTask.addEventListener("click", () => {
-        initEditTodoDialog(project.id, task.id);
-        setCurrentTodo(task.id);
-      });
-
-      deleteTask.addEventListener("click", () => {
-        deleteTodo(project.id, task.id);
-        loadAllTask();
-      });
-
-      taskDataContainer.append(
-        taskTitle,
-        taskDescription,
-        taskDate,
-        taskPriority
-      );
-
-      taskOptionsContainer.append(checkbox, editTask, deleteTask);
-
-      taskItem.append(taskDataContainer, taskOptionsContainer);
-      tasksList.appendChild(taskItem);
+      loadTaskDom(project, task, tasksList);
     });
   });
 }
@@ -162,51 +54,7 @@ function loadTodayTask() {
       taskDueDate.setHours(0, 0, 0, 0);
       if (taskDueDate.getTime() !== today.getTime()) return;
 
-      const taskItem = document.createElement("li");
-      const taskTitle = document.createElement("h2");
-      const taskDescription = document.createElement("p");
-      const taskDate = document.createElement("p");
-      const taskPriority = document.createElement("p");
-      const editTask = document.createElement("button");
-      const deleteTask = document.createElement("button");
-
-      const taskDataContainer = document.createElement("div");
-      const taskOptionsContainer = document.createElement("div");
-
-      taskDataContainer.className = "task-data";
-      taskOptionsContainer.className = "task-actions";
-
-      editTask.textContent = "Edit";
-      deleteTask.textContent = "Delete";
-      taskDescription.textContent = task.desc;
-      taskTitle.textContent = task.title;
-      taskDate.textContent = `Due: ${task.dueDate}`;
-      taskPriority.textContent = task.priority;
-
-      editTask.id = "edit-task-button";
-      deleteTask.id = "delete-task-button";
-
-      editTask.addEventListener("click", () => {
-        initEditTodoDialog(project.id, task.id);
-        setCurrentTodo(task.id);
-      });
-
-      deleteTask.addEventListener("click", () => {
-        deleteTodo(project.id, task.id);
-        loadAllTask();
-      });
-
-      taskDataContainer.append(
-        taskTitle,
-        taskDescription,
-        taskDate,
-        taskPriority
-      );
-
-      taskOptionsContainer.append(editTask, deleteTask);
-
-      taskItem.append(taskDataContainer, taskOptionsContainer);
-      tasksList.appendChild(taskItem);
+      loadTaskDom(project, task, tasksList);
     });
   });
 }
@@ -226,54 +74,52 @@ function loadUpcomingTask() {
       taskDueDate.setHours(0, 0, 0, 0);
       if (taskDueDate.getTime() === today.getTime()) return;
 
-      const taskItem = document.createElement("li");
-      const taskTitle = document.createElement("h2");
-      const taskDescription = document.createElement("p");
-      const taskDate = document.createElement("p");
-      const taskPriority = document.createElement("p");
-      const editTask = document.createElement("button");
-      const deleteTask = document.createElement("button");
-
-      const taskDataContainer = document.createElement("div");
-      const taskOptionsContainer = document.createElement("div");
-
-      taskDataContainer.className = "task-data";
-      taskOptionsContainer.className = "task-actions";
-
-      editTask.textContent = "Edit";
-      deleteTask.textContent = "Delete";
-      taskDescription.textContent = task.desc;
-      taskTitle.textContent = task.title;
-      taskDate.textContent = `Due: ${task.dueDate}`;
-      taskPriority.textContent = task.priority;
-
-      editTask.id = "edit-task-button";
-      deleteTask.id = "delete-task-button";
-
-      editTask.addEventListener("click", () => {
-        initEditTodoDialog(project.id, task.id);
-        setCurrentTodo(task.id);
-        // loadTaskDOM(project);
-      });
-
-      deleteTask.addEventListener("click", () => {
-        deleteTodo(project.id, task.id);
-        loadAllTask();
-      });
-
-      taskDataContainer.append(
-        taskTitle,
-        taskDescription,
-        taskDate,
-        taskPriority
-      );
-
-      taskOptionsContainer.append(editTask, deleteTask);
-
-      taskItem.append(taskDataContainer, taskOptionsContainer);
-      tasksList.appendChild(taskItem);
+      loadTaskDom(project, task, tasksList);
     });
   });
+}
+
+function loadTaskDom(project, task, tasksList) {
+  const taskItem = document.createElement("li");
+  const taskTitle = document.createElement("h2");
+  const taskDescription = document.createElement("p");
+  const taskDate = document.createElement("p");
+  const taskPriority = document.createElement("p");
+  const editTask = document.createElement("button");
+  const deleteTask = document.createElement("button");
+
+  const taskDataContainer = document.createElement("div");
+  const taskOptionsContainer = document.createElement("div");
+
+  taskDataContainer.className = "task-data";
+  taskOptionsContainer.className = "task-actions";
+
+  editTask.textContent = "Edit";
+  deleteTask.textContent = "Delete";
+  taskDescription.textContent = task.desc;
+  taskTitle.textContent = task.title;
+  taskDate.textContent = `Due: ${task.dueDate}`;
+  taskPriority.textContent = task.priority;
+
+  editTask.id = "edit-task-button";
+  deleteTask.id = "delete-task-button";
+
+  editTask.addEventListener("click", () => {
+    initEditTodoDialog(project.id, task.id);
+    setCurrentTodo(task.id);
+  });
+
+  deleteTask.addEventListener("click", () => {
+    deleteTodo(project.id, task.id);
+    loadAllTask();
+  });
+
+  taskDataContainer.append(taskTitle, taskDescription, taskDate, taskPriority);
+
+  taskOptionsContainer.append(editTask, deleteTask);
+
+  taskItem.append(taskDataContainer, taskOptionsContainer);
+  tasksList.appendChild(taskItem);
 }
 
 export {
