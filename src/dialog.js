@@ -5,7 +5,7 @@ import {
   getCurrentForm,
 } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
-import { projectSideBar } from "./projects.js";
+import { loadProjectsList } from "./projects.js";
 import { loadTask, loadSelectedTask } from "./loadTasks.js";
 
 function initAddProjectDialog() {
@@ -30,7 +30,7 @@ function initAddProjectDialog() {
     const newProjectId = `p${todoData.length + 1}`;
 
     newProject(newProjectId, projectName);
-    projectSideBar();
+    loadProjectsList();
   });
 }
 

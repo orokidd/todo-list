@@ -1,7 +1,19 @@
 import { getTodoData } from "./todoData";
-import { loadAllTask, loadTodayTask, loadUpcomingTask } from "./loadTasks";
+import {
+  loadAllTask,
+  loadTodayTask,
+  loadUpcomingTask,
+  loadTask,
+  loadSelectedTask,
+} from "./loadTasks";
+import { setCurrentProject } from "./state.js";
+import {
+  initAddProjectDialog,
+  initAddTodoDialog,
+  editEventListener,
+} from "./dialog.js";
 
-function projectSideBar() {
+function loadProjectsList() {
   const projects = getTodoData();
   const projectBar = document.querySelector(".projects-ul");
 
@@ -17,7 +29,25 @@ function projectSideBar() {
   });
 }
 
-function sideAllTask() {
+function projectsListHandler() {
+  const projects = document.querySelector(".projects-ul");
+  projects.addEventListener("click", (e) => {
+    if (e.target.classList.contains("project")) {
+      const projectId = e.target.id;
+      const project = loadTask(projectId);
+      loadSelectedTask(project);
+      setCurrentProject(projectId);
+      showAddTaskButton();
+    }
+  });
+}
+
+function addTodoHandler() {
+  const addNewTodoBtn = document.querySelector("#newTodoBtn");
+  addNewTodoBtn.addEventListener("click", initAddTodoDialog);
+}
+
+function allTaskHandler() {
   const allTaskBtn = document.querySelector("#all-task-btn");
 
   allTaskBtn.addEventListener("click", () => {
@@ -26,7 +56,7 @@ function sideAllTask() {
   });
 }
 
-function sideTodayTask() {
+function todayTaskHandler() {
   const todayTaskBtn = document.querySelector("#today-task-btn");
 
   todayTaskBtn.addEventListener("click", () => {
@@ -35,7 +65,7 @@ function sideTodayTask() {
   });
 }
 
-function sideUpcomingTask() {
+function upcomingTaskHandler() {
   const todayTaskBtn = document.querySelector("#upcoming-task-btn");
 
   todayTaskBtn.addEventListener("click", () => {
@@ -54,9 +84,11 @@ function hideAddTaskButton() {
   addTaskBtn.style.display = "none";
 }
 
-projectSideBar();
-sideAllTask();
-sideTodayTask();
-sideUpcomingTask();
+loadProjectsList();
+allTaskHandler();
+todayTaskHandler();
+upcomingTaskHandler();9
+addTodoHandler();
+projectsListHandler();
 
-export { projectSideBar, showAddTaskButton };
+export { loadProjectsList, showAddTaskButton };
