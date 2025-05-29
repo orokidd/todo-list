@@ -1,5 +1,5 @@
 import "./styles.css";
-import { initAddProjectDialog, editEventListener } from "./dialog.js";
+import { initAddProjectDialog, formSubmitEventListener } from "./dialog.js";
 import {
   showAddTaskButton,
   loadProjectsList,
@@ -12,7 +12,7 @@ import {
 
 const initApp = (() => {
   initAddProjectDialog();
-  editEventListener();
+  formSubmitEventListener();
   loadProjectsList();
   allTaskHandler();
   todayTaskHandler();

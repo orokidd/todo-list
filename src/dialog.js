@@ -66,7 +66,7 @@ function initEditTodoDialog(projectId, todoId) {
   document.getElementById("taskPriority").value = todo.priority;
 }
 
-function editEventListener() {
+function formSubmitEventListener() {
   const dialog = document.getElementById("todoDialog");
   const form = document.getElementById("todoForm");
   const cancelBtn = document.getElementById("cancelTodo");
@@ -117,5 +117,5 @@ export {
   initAddProjectDialog,
   initEditTodoDialog,
   initAddTodoDialog,
-  editEventListener,
+  formSubmitEventListener
 };

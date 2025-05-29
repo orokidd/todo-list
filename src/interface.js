@@ -10,7 +10,7 @@ import { setCurrentProject } from "./state.js";
 import {
   initAddProjectDialog,
   initAddTodoDialog,
-  editEventListener,
+  formSubmitEventListener,
 } from "./dialog.js";
 
 function loadProjectsList() {
