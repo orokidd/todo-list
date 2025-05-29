@@ -12,9 +12,8 @@ function loadSelectedTask(project) {
   const tasksList = document.querySelector(".main-tasks");
   tasksList.innerHTML = "";
 
-  const projectName = document.createElement("h1");
+  const projectName = document.querySelector(".header-left");
   projectName.textContent = project.name;
-  tasksList.appendChild(projectName);
 
   if (!project) {
     tasksList.textContent = "Project not found.";
@@ -29,6 +28,9 @@ function loadSelectedTask(project) {
 function loadAllTask() {
   const tasksList = document.querySelector(".main-tasks");
   tasksList.innerHTML = "";
+
+  const projectName = document.querySelector(".header-left");
+  projectName.textContent = "All Tasks";
 
   const projects = getTodoData();
 
@@ -45,6 +47,9 @@ function loadTodayTask() {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  const projectName = document.querySelector(".header-left");
+  projectName.textContent = "Today Tasks";
 
   const projects = getTodoData();
 
@@ -65,6 +70,9 @@ function loadUpcomingTask() {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  const projectName = document.querySelector(".header-left");
+  projectName.textContent = "Upcoming Tasks";
 
   const projects = getTodoData();
 
