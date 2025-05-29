@@ -1,11 +1,11 @@
-import { getTodoData } from "./todoData";
+import { getTodoData } from "./todoData.js";
 import {
   loadAllTask,
   loadTodayTask,
   loadUpcomingTask,
   loadTask,
   loadSelectedTask,
-} from "./loadTasks";
+} from "./loadTasks.js";
 import { setCurrentProject } from "./state.js";
 import {
   initAddProjectDialog,
@@ -84,11 +84,4 @@ function hideAddTaskButton() {
   addTaskBtn.style.display = "none";
 }
 
-loadProjectsList();
-allTaskHandler();
-todayTaskHandler();
-upcomingTaskHandler();9
-addTodoHandler();
-projectsListHandler();
-
-export { loadProjectsList, showAddTaskButton };
+export { loadProjectsList, showAddTaskButton, allTaskHandler, todayTaskHandler, upcomingTaskHandler, addTodoHandler, projectsListHandler };

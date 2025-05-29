@@ -1,9 +1,22 @@
 import "./styles.css";
-import { loadTask, loadSelectedTask } from "./loadTasks.js";
-import { setCurrentProject } from "./state.js";
-import { initAddProjectDialog, initAddTodoDialog, editEventListener } from "./dialog.js";
-import { showAddTaskButton } from "./projects.js";
+import { initAddProjectDialog, editEventListener } from "./dialog.js";
+import {
+  showAddTaskButton,
+  loadProjectsList,
+  allTaskHandler,
+  todayTaskHandler,
+  upcomingTaskHandler,
+  addTodoHandler,
+  projectsListHandler,
+} from "./interface.js";
 
-
-initAddProjectDialog();
-editEventListener();
+const initApp = (() => {
+  initAddProjectDialog();
+  editEventListener();
+  loadProjectsList();
+  allTaskHandler();
+  todayTaskHandler();
+  upcomingTaskHandler();
+  addTodoHandler();
+  projectsListHandler();
+})();

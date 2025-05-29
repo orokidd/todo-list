@@ -5,7 +5,7 @@ import {
   getCurrentForm,
 } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
-import { loadProjectsList } from "./projects.js";
+import { loadProjectsList } from "./interface.js";
 import { loadTask, loadSelectedTask } from "./loadTasks.js";
 
 function initAddProjectDialog() {
