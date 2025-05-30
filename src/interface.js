@@ -6,7 +6,7 @@ import {
   loadTask,
   loadSelectedTask,
 } from "./loadTasks.js";
-import { setCurrentProject } from "./state.js";
+import { setCurrentProject, setCurrentPage, getCurrentPage } from "./state.js";
 import {
   initAddProjectDialog,
   initAddTodoDialog,
@@ -37,6 +37,7 @@ function projectsListHandler() {
       const project = loadTask(projectId);
       loadSelectedTask(project);
       setCurrentProject(projectId);
+      setCurrentPage("project")
       showAddTaskButton();
     }
   });
@@ -52,6 +53,7 @@ function allTaskHandler() {
 
   allTaskBtn.addEventListener("click", () => {
     loadAllTask();
+    setCurrentPage("alltask")
     hideAddTaskButton();
   });
 }
@@ -61,6 +63,7 @@ function todayTaskHandler() {
 
   todayTaskBtn.addEventListener("click", () => {
     loadTodayTask();
+    setCurrentPage("todaytask")
     hideAddTaskButton();
   });
 }
@@ -70,6 +73,7 @@ function upcomingTaskHandler() {
 
   todayTaskBtn.addEventListener("click", () => {
     loadUpcomingTask();
+    setCurrentPage("upcomingtask")
     hideAddTaskButton();
   });
 }

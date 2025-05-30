@@ -1,4 +1,4 @@
-import { getTodoData, deleteTodo } from "./todoData.js";
+import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
 import { setCurrentTodo } from "./state.js";
 
@@ -95,12 +95,16 @@ function loadTaskDom(project, task, tasksList) {
   const taskPriority = document.createElement("p");
   const editTask = document.createElement("button");
   const deleteTask = document.createElement("button");
+  const checkbox = document.createElement("input");
 
   const taskDataContainer = document.createElement("div");
   const taskOptionsContainer = document.createElement("div");
 
   taskDataContainer.className = "task-data";
   taskOptionsContainer.className = "task-actions";
+
+  checkbox.type = "checkbox";
+  checkbox.checked = task.completed;
 
   editTask.textContent = "Edit";
   deleteTask.textContent = "Delete";
@@ -109,8 +113,15 @@ function loadTaskDom(project, task, tasksList) {
   taskDate.textContent = `Due: ${task.dueDate}`;
   taskPriority.textContent = task.priority;
 
+  taskTitle.style.textDecoration = task.completed ? "line-through" : "none";
+
   editTask.id = "edit-task-button";
   deleteTask.id = "delete-task-button";
+
+  checkbox.addEventListener("change", () => {
+    toggleCompletion(project.id, task.id);
+    loadAllTask();
+  });
 
   editTask.addEventListener("click", () => {
     initEditTodoDialog(project.id, task.id);
@@ -124,11 +135,13 @@ function loadTaskDom(project, task, tasksList) {
 
   taskDataContainer.append(taskTitle, taskDescription, taskDate, taskPriority);
 
-  taskOptionsContainer.append(editTask, deleteTask);
+  taskOptionsContainer.append(checkbox, editTask, deleteTask);
 
   taskItem.append(taskDataContainer, taskOptionsContainer);
   tasksList.appendChild(taskItem);
 }
+
+
 
 export {
   loadTask,

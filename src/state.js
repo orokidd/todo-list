@@ -1,6 +1,7 @@
 let currentProjectId = null;
 let currentTodoId = null;
 let currentForm = null;
+let currentPage = null;
 
 function setCurrentProject(id) {
   currentProjectId = id;
@@ -29,4 +30,13 @@ function getCurrentForm() {
   return currentForm;
 }
 
-export { setCurrentProject, getCurrentProject, setCurrentTodo, getCurrentTodo, setCurrentForm, getCurrentForm }
+function setCurrentPage(page) {
+  currentPage = page;
+  console.log(currentPage)
+}
+
+function getCurrentPage() {
+  return currentPage;
+}
+
+export { setCurrentProject, getCurrentProject, setCurrentTodo, getCurrentTodo, setCurrentForm, getCurrentForm, setCurrentPage, getCurrentPage }

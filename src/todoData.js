@@ -9,7 +9,7 @@ const todoData = [
           desc: "Milk, eggs, bread",
           dueDate: "2025-05-20",
           priority: "High",        
-          status: false,            
+          completed: false,            
         },
         {
           id: "t2",
@@ -17,7 +17,7 @@ const todoData = [
           desc: "Ay check it bro",
           dueDate: "2025-05-21",
           priority: "Low",
-          status: true,
+          completed: true,
         }
       ]
     },
@@ -31,7 +31,7 @@ const todoData = [
           desc: "Q1 Financials",
           dueDate: "2025-04-22",
           priority: "Medium",
-          status: false,
+          completed: false,
         },
         {
           id: "t2",
@@ -39,7 +39,7 @@ const todoData = [
           desc: "Q2 Visual design",
           dueDate: "2025-05-24",
           priority: "Low",
-          status: false,
+          completed: true,
         },
         {
           id: "t3",
@@ -47,7 +47,7 @@ const todoData = [
           desc: "Q3 Midtterm",
           dueDate: "2025-06-26",
           priority: "High",
-          status: false,
+          completed: false,
         }
       ]
     }
@@ -71,7 +71,6 @@ function deleteProject(projectId) {
 function newTodo(projectId, todo) {
   const project = todoData.findIndex(project => project.id === projectId);
   todoData[project].todos.push(todo)
-  console.log(todoData)
 }
 
 function editTodo(projectId, todoId, updatedTodo) {
@@ -79,7 +78,6 @@ function editTodo(projectId, todoId, updatedTodo) {
     const todoIndex = todoData[projectIndex].todos.findIndex(todo => todo.id === todoId);
 
     todoData[projectIndex].todos[todoIndex] = updatedTodo;
-    console.log(todoData)
 }
 
 function deleteTodo(projectId, todoId) {
@@ -92,4 +90,11 @@ function deleteTodo(projectId, todoId) {
   }
 }
 
-export { getTodoData, newProject, deleteProject, deleteTodo, newTodo, editTodo };
+function toggleCompletion(projectId, todoId) {
+  const projectIndex = todoData.findIndex(project => project.id === projectId);
+  const todoIndex = todoData[projectIndex].todos.findIndex(todo => todo.id === todoId);
+
+  todoData[projectIndex].todos[todoIndex].completed = !todoData[projectIndex].todos[todoIndex].completed
+}
+
+export { getTodoData, newProject, deleteProject, deleteTodo, newTodo, editTodo, toggleCompletion };
