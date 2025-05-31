@@ -1,6 +1,6 @@
 import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
-import { setCurrentTodo, getCurrentPage } from "./state.js";
+import { setCurrentProject, setCurrentTodo, getCurrentPage } from "./state.js";
 
 function loadTask(projectId) {
   const projects = getTodoData();
@@ -125,6 +125,7 @@ function loadTaskDom(project, task, tasksListDom) {
 
   editTask.addEventListener("click", () => {
     initEditTodoDialog(project.id, task.id);
+    setCurrentProject(project.id)
     setCurrentTodo(task.id);
   });
 
