@@ -1,6 +1,6 @@
 import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
-import { setCurrentTodo } from "./state.js";
+import { setCurrentTodo, getCurrentPage } from "./state.js";
 
 function loadTask(projectId) {
   const projects = getTodoData();
@@ -87,7 +87,7 @@ function loadUpcomingTask() {
   });
 }
 
-function loadTaskDom(project, task, tasksList) {
+function loadTaskDom(project, task, tasksListDom) {
   const taskItem = document.createElement("li");
   const taskTitle = document.createElement("h2");
   const taskDescription = document.createElement("p");
@@ -120,7 +120,7 @@ function loadTaskDom(project, task, tasksList) {
 
   checkbox.addEventListener("change", () => {
     toggleCompletion(project.id, task.id);
-    loadAllTask();
+    updateUI(project);
   });
 
   editTask.addEventListener("click", () => {
@@ -130,7 +130,7 @@ function loadTaskDom(project, task, tasksList) {
 
   deleteTask.addEventListener("click", () => {
     deleteTodo(project.id, task.id);
-    loadAllTask();
+    updateUI(project);
   });
 
   taskDataContainer.append(taskTitle, taskDescription, taskDate, taskPriority);
@@ -138,10 +138,30 @@ function loadTaskDom(project, task, tasksList) {
   taskOptionsContainer.append(checkbox, editTask, deleteTask);
 
   taskItem.append(taskDataContainer, taskOptionsContainer);
-  tasksList.appendChild(taskItem);
+  tasksListDom.appendChild(taskItem);
 }
 
+function updateUI(currentProject) {
+  const currentPage = getCurrentPage();
+  const tasksList = document.querySelector(".main-tasks");
 
+  tasksList.innerHTML = "";
+  
+  switch (currentPage) {
+  case "alltask":
+    loadAllTask();
+    break;
+  case "todaytask":
+    loadTodayTask();
+    break;
+  case "upcomingtask":
+    loadUpcomingTask();
+    break;
+  case "project":
+    loadSelectedTask(currentProject);
+    break;
+}
+}
 
 export {
   loadTask,

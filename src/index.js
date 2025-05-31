@@ -10,6 +10,7 @@ import {
   addTodoHandler,
   projectsListHandler,
 } from "./interface.js";
+import { setCurrentPage } from "./state.js";
 
 const initApp = (() => {
   initAddProjectDialog();
@@ -21,4 +22,5 @@ const initApp = (() => {
   addTodoHandler();
   projectsListHandler();
   loadAllTask();
+  setCurrentPage("alltask");
 })();
