@@ -88,4 +88,9 @@ function hideAddTaskButton() {
   addTaskBtn.style.display = "none";
 }
 
-export { loadProjectsList, showAddTaskButton, allTaskHandler, todayTaskHandler, upcomingTaskHandler, addTodoHandler, projectsListHandler };
+function clearMainWindow() {
+  const tasksList = document.querySelector(".main-tasks");
+  tasksList.innerHTML = "";
+}
+
+export { loadProjectsList, showAddTaskButton, allTaskHandler, todayTaskHandler, upcomingTaskHandler, addTodoHandler, projectsListHandler, clearMainWindow };

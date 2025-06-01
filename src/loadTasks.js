@@ -1,6 +1,7 @@
 import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
 import { setCurrentProject, setCurrentTodo, getCurrentPage } from "./state.js";
+import { clearMainWindow } from "./interface.js";
 
 function loadTask(projectId) {
   const projects = getTodoData();
@@ -9,8 +10,7 @@ function loadTask(projectId) {
 }
 
 function loadSelectedTask(project) {
-  const tasksList = document.querySelector(".main-tasks");
-  tasksList.innerHTML = "";
+  clearMainWindow();
 
   const projectName = document.querySelector(".header-left");
   projectName.textContent = project.name;
@@ -21,13 +21,12 @@ function loadSelectedTask(project) {
   }
 
   project.todos.forEach((task) => {
-    loadTaskDom(project, task, tasksList);
+    loadTaskDom(project, task);
   });
 }
 
 function loadAllTask() {
-  const tasksList = document.querySelector(".main-tasks");
-  tasksList.innerHTML = "";
+  clearMainWindow();
 
   const projectName = document.querySelector(".header-left");
   projectName.textContent = "All Tasks";
@@ -36,14 +35,13 @@ function loadAllTask() {
 
   projects.forEach((project) => {
     project.todos.forEach((task) => {
-      loadTaskDom(project, task, tasksList);
+      loadTaskDom(project, task);
     });
   });
 }
 
 function loadTodayTask() {
-  const tasksList = document.querySelector(".main-tasks");
-  tasksList.innerHTML = "";
+  clearMainWindow();
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -59,14 +57,13 @@ function loadTodayTask() {
       taskDueDate.setHours(0, 0, 0, 0);
       if (taskDueDate.getTime() !== today.getTime()) return;
 
-      loadTaskDom(project, task, tasksList);
+      loadTaskDom(project, task);
     });
   });
 }
 
 function loadUpcomingTask() {
-  const tasksList = document.querySelector(".main-tasks");
-  tasksList.innerHTML = "";
+  clearMainWindow();
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -82,13 +79,18 @@ function loadUpcomingTask() {
       taskDueDate.setHours(0, 0, 0, 0);
       if (taskDueDate.getTime() === today.getTime()) return;
 
-      loadTaskDom(project, task, tasksList);
+      loadTaskDom(project, task);
     });
   });
 }
 
-function loadTaskDom(project, task, tasksListDom) {
+function loadTaskDom(project, task) {
+  const tasksList = document.querySelector(".main-tasks");
+
   const taskItem = document.createElement("li");
+  const taskDataContainer = document.createElement("div");
+  const taskOptionsContainer = document.createElement("div");
+
   const taskTitle = document.createElement("h2");
   const taskDescription = document.createElement("p");
   const taskDate = document.createElement("p");
@@ -96,9 +98,6 @@ function loadTaskDom(project, task, tasksListDom) {
   const editTask = document.createElement("button");
   const deleteTask = document.createElement("button");
   const checkbox = document.createElement("input");
-
-  const taskDataContainer = document.createElement("div");
-  const taskOptionsContainer = document.createElement("div");
 
   taskDataContainer.className = "task-data";
   taskOptionsContainer.className = "task-actions";
@@ -135,18 +134,15 @@ function loadTaskDom(project, task, tasksListDom) {
   });
 
   taskDataContainer.append(taskTitle, taskDescription, taskDate, taskPriority);
-
   taskOptionsContainer.append(checkbox, editTask, deleteTask);
 
   taskItem.append(taskDataContainer, taskOptionsContainer);
-  tasksListDom.appendChild(taskItem);
+  tasksList.appendChild(taskItem);
 }
 
 function updateUI(currentProject) {
   const currentPage = getCurrentPage();
-  const tasksList = document.querySelector(".main-tasks");
-
-  tasksList.innerHTML = "";
+  clearMainWindow();
   
   switch (currentPage) {
   case "alltask":
