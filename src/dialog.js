@@ -6,7 +6,7 @@ import {
 } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
 import { loadProjectsList } from "./interface.js";
-import { loadTask, loadSelectedTask } from "./loadTasks.js";
+import { loadTask, loadSelectedTask, updateUI } from "./loadTasks.js";
 
 function initAddProjectDialog() {
   const dialog = document.getElementById("newProjectDialog");
@@ -107,7 +107,7 @@ function formSubmitEventListener() {
       newTodo(currentProjectId, task);
     }
     const project = loadTask(currentProjectId);
-    loadSelectedTask(project);
+    updateUI(project);
     dialog.close();
     form.reset();
   });

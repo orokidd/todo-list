@@ -166,4 +166,5 @@ export {
   loadAllTask,
   loadTodayTask,
   loadUpcomingTask,
+  updateUI
 };
