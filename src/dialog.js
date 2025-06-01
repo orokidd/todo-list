@@ -64,6 +64,7 @@ function initEditTodoDialog(projectId, todoId) {
   document.getElementById("taskDescription").value = todo.desc;
   document.getElementById("taskDueDate").value = todo.dueDate;
   document.getElementById("taskPriority").value = todo.priority;
+  document.getElementById("taskStatus").checked = todo.completed;
 }
 
 function formSubmitEventListener() {
@@ -88,6 +89,7 @@ function formSubmitEventListener() {
         desc: document.getElementById("taskDescription").value,
         dueDate: document.getElementById("taskDueDate").value,
         priority: document.getElementById("taskPriority").value,
+        completed: document.getElementById("taskStatus").checked
       };
       editTodo(currentProjectId, currentTodoId, task);
     } else {
@@ -103,6 +105,7 @@ function formSubmitEventListener() {
         desc: document.getElementById("taskDescription").value,
         dueDate: document.getElementById("taskDueDate").value,
         priority: document.getElementById("taskPriority").value,
+        completed: false
       };
       newTodo(currentProjectId, task);
     }

@@ -196,3 +196,7 @@ body {
 #edit-task-button {
   margin-right: 5px;
 }
+
+#taskStatus {
+  display: none;
+}
