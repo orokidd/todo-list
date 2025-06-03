@@ -129,7 +129,7 @@ function loadTaskDom(project, task) {
   });
 
   deleteTask.addEventListener("click", () => {
-    deleteTodo(project.id, task.id);
+    deleteTodo(project, task.id);
     updateUI(project);
   });
 
