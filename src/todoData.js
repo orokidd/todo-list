@@ -81,7 +81,6 @@ function deleteProject(projectId) {
 function newTodo(projectId, todo) {
   const project = todoData.findIndex((project) => project.id === projectId);
   todoData[project].todos.push(todo);
-  console.log(todoData);
   saveToStorage();
 }
 
@@ -116,16 +115,8 @@ function deleteTodo(project, todoId) {
   }
 }
 
-function toggleCompletion(projectId, todoId) {
-  const projectIndex = todoData.findIndex(
-    (project) => project.id === projectId
-  );
-  const todoIndex = todoData[projectIndex].todos.findIndex(
-    (todo) => todo.id === todoId
-  );
-
-  todoData[projectIndex].todos[todoIndex].completed =
-    !todoData[projectIndex].todos[todoIndex].completed;
+function toggleCompletion(todo) {
+  todo.completed = !todo.completed;
   saveToStorage();
 }
 

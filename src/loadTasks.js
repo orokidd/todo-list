@@ -118,7 +118,7 @@ function loadTaskDom(project, task) {
   deleteTask.id = "delete-task-button";
 
   checkbox.addEventListener("change", () => {
-    toggleCompletion(project.id, task.id);
+    toggleCompletion(task);
     updateUI(project);
   });
 
