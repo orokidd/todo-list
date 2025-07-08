@@ -43,45 +43,52 @@ function loadAllTask() {
 function loadTodayTask() {
   clearMainWindow();
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
   const projectName = document.querySelector(".header-left");
+  const todayTodos = getTodayTodos();
   projectName.textContent = "Today Tasks";
 
-  const projects = getTodoData();
-
-  projects.forEach((project) => {
-    project.todos.forEach((task) => {
-      const taskDueDate = new Date(task.dueDate);
-      taskDueDate.setHours(0, 0, 0, 0);
-      if (taskDueDate.getTime() !== today.getTime()) return;
-
-      loadTaskDom(project, task);
-    });
+  todayTodos.todos.forEach((task) => {
+    loadTaskDom(task);
   });
 }
 
 function loadUpcomingTask() {
   clearMainWindow();
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
   const projectName = document.querySelector(".header-left");
+  const upcomingTodos = getUpcomingTodos();
   projectName.textContent = "Upcoming Tasks";
 
-  const projects = getTodoData();
-
-  projects.forEach((project) => {
-    project.todos.forEach((task) => {
-      const taskDueDate = new Date(task.dueDate);
-      taskDueDate.setHours(0, 0, 0, 0);
-      if (taskDueDate.getTime() === today.getTime()) return;
-
-      loadTaskDom(project, task);
-    });
+  upcomingTodos.todos.forEach((task) => {
+    loadTaskDom(task);
   });
+}
+
+function getTodayTodos() {
+  const projects = getTodoData();
+  const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+
+  const todayTodos = projects.flatMap(project =>
+    project.todos.filter(todo => todo.dueDate === today)
+  );
+
+  return todayTodos;
+}
+
+function getUpcomingTodos() {
+  const projects = getTodoData();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time for accurate date comparison
+
+  const upcomingTodos = projects.flatMap(project =>
+    project.todos.filter(todo => {
+      const dueDate = new Date(todo.dueDate);
+      dueDate.setHours(0, 0, 0, 0); // Normalize time
+      todo.dueDate > today;
+    })
+  );
+
+  return upcomingTodos
 }
 
 function loadTaskDom(project, task) {
@@ -166,5 +173,7 @@ export {
   loadAllTask,
   loadTodayTask,
   loadUpcomingTask,
+  getTodayTodos,
+  getUpcomingTodos,
   updateUI
 };
