@@ -6,9 +6,9 @@ import { showAddTaskButton, hideAddTaskButton } from "./interface.js";
 
 function projectsListHandler(e, project) {
     if (e.target.classList.contains("project")) {
-      loadSelectedTask(project);
       setCurrentProject(project.id);
       setCurrentPage("project")
+      loadSelectedTask();
       showAddTaskButton();
     }}
 

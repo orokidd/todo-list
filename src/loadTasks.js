@@ -1,67 +1,21 @@
 import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
-import { setCurrentProject, setCurrentTodo, getCurrentPage } from "./state.js";
+import { setCurrentProject, setCurrentTodo, getCurrentPage, getCurrentProject } from "./state.js";
 import { clearMainWindow } from "./interface.js";
 
-function loadTask(projectId) {
+function getSelectedProject() {
   const projects = getTodoData();
+  const projectId = getCurrentProject();
   const selectedProject = projects.find((project) => project.id === projectId);
+
   return selectedProject || null;
 }
 
-function loadSelectedTask(project) {
-  clearMainWindow();
+function getAllTodos() {
+  const projects = getTodoData()
+  const allTodos = projects.flatMap(project => project.todos);
 
-  const projectName = document.querySelector(".header-left");
-  projectName.textContent = project.name;
-
-  if (!project) {
-    tasksList.textContent = "Project not found.";
-    return;
-  }
-
-  project.todos.forEach((task) => {
-    loadTaskDom(project, task);
-  });
-}
-
-function loadAllTask() {
-  clearMainWindow();
-
-  const projectName = document.querySelector(".header-left");
-  projectName.textContent = "All Tasks";
-
-  const projects = getTodoData();
-
-  projects.forEach((project) => {
-    project.todos.forEach((task) => {
-      loadTaskDom(project, task);
-    });
-  });
-}
-
-function loadTodayTask() {
-  clearMainWindow();
-
-  const projectName = document.querySelector(".header-left");
-  const todayTodos = getTodayTodos();
-  projectName.textContent = "Today Tasks";
-
-  todayTodos.todos.forEach((task) => {
-    loadTaskDom(task);
-  });
-}
-
-function loadUpcomingTask() {
-  clearMainWindow();
-
-  const projectName = document.querySelector(".header-left");
-  const upcomingTodos = getUpcomingTodos();
-  projectName.textContent = "Upcoming Tasks";
-
-  upcomingTodos.todos.forEach((task) => {
-    loadTaskDom(task);
-  });
+  return allTodos
 }
 
 function getTodayTodos() {
@@ -91,7 +45,55 @@ function getUpcomingTodos() {
   return upcomingTodos
 }
 
-function loadTaskDom(project, task) {
+function loadSelectedTask() {
+  clearMainWindow();
+
+  const selectedProject = getSelectedProject();
+  const projectName = document.querySelector(".header-left");
+  projectName.textContent = selectedProject.name;
+
+  selectedProject.todos.forEach((task) => {
+    loadTaskDom(task);
+  });
+}
+
+function loadAllTask() {
+  clearMainWindow();
+
+  const projectName = document.querySelector(".header-left");
+  const allTodos = getAllTodos();
+  projectName.textContent = "All Tasks";
+
+  allTodos.forEach((task) => {
+    loadTaskDom(task);
+  });
+}
+
+function loadTodayTask() {
+  clearMainWindow();
+
+  const projectName = document.querySelector(".header-left");
+  const todayTodos = getTodayTodos();
+  projectName.textContent = "Today Tasks";
+
+  todayTodos.forEach((task) => {
+    loadTaskDom(task);
+  });
+}
+
+function loadUpcomingTask() {
+  clearMainWindow();
+
+  const projectName = document.querySelector(".header-left");
+  const upcomingTodos = getUpcomingTodos();
+  projectName.textContent = "Upcoming Tasks";
+
+  upcomingTodos.forEach((task) => {
+    loadTaskDom(task);
+  });
+}
+
+function loadTaskDom(task) {
   const tasksList = document.querySelector(".main-tasks");
 
   const taskItem = document.createElement("li");
@@ -126,18 +128,18 @@ function loadTaskDom(project, task) {
 
   checkbox.addEventListener("change", () => {
     toggleCompletion(task);
-    updateUI(project);
+    updateUI();
   });
 
   editTask.addEventListener("click", () => {
-    initEditTodoDialog(project.id, task.id);
-    setCurrentProject(project.id)
+    initEditTodoDialog(task);
+    // setCurrentProject(project.id)
     setCurrentTodo(task.id);
   });
 
   deleteTask.addEventListener("click", () => {
-    deleteTodo(project, task.id);
-    updateUI(project);
+    deleteTodo(task);
+    updateUI();
   });
 
   taskDataContainer.append(taskTitle, taskDescription, taskDate, taskPriority);
@@ -147,7 +149,7 @@ function loadTaskDom(project, task) {
   tasksList.appendChild(taskItem);
 }
 
-function updateUI(currentProject) {
+function updateUI() {
   const currentPage = getCurrentPage();
   clearMainWindow();
   
@@ -162,13 +164,12 @@ function updateUI(currentProject) {
     loadUpcomingTask();
     break;
   case "project":
-    loadSelectedTask(currentProject);
+    loadSelectedTask();
     break;
 }
 }
 
 export {
-  loadTask,
   loadSelectedTask,
   loadAllTask,
   loadTodayTask,

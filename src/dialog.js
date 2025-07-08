@@ -44,22 +44,11 @@ function initAddTodoDialog() {
   document.getElementById("todoDialog").showModal();
 }
 
-function initEditTodoDialog(projectId, todoId) {
+function initEditTodoDialog(todo) {
   const dialog = document.getElementById("todoDialog");
   dialog.showModal();
   setCurrentForm("edit");
-
-  const todoData = getTodoData();
-  const currentProjectId = projectId;
-  const projectIndex = todoData.findIndex(
-    (project) => project.id === currentProjectId
-  );
-  const todoIndex = todoData[projectIndex].todos.findIndex(
-    (todo) => todo.id === todoId
-  );
-
-  const todo = todoData[projectIndex].todos[todoIndex];
-
+  
   document.getElementById("taskTitle").value = todo.title;
   document.getElementById("taskDescription").value = todo.desc;
   document.getElementById("taskDueDate").value = todo.dueDate;
@@ -109,8 +98,8 @@ function formSubmitEventListener() {
       };
       newTodo(currentProjectId, task);
     }
-    const project = loadTask(currentProjectId);
-    updateUI(project);
+    // const project = loadTask(currentProjectId);
+    updateUI();
     dialog.close();
     form.reset();
   });

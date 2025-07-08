@@ -94,9 +94,17 @@ function editTodo(projectId, todoId, updatedTodo) {
   saveToStorage();
 }
 
-function deleteTodo(project, todoId) {
-  const todoIndex = project.todos.findIndex((todo) => todo.id === todoId);
-  project.todos.splice(todoIndex, 1);
+// function deleteTodo(project, todoId) {
+//   const todoIndex = project.todos.findIndex((todo) => todo.id === todoId);
+//   project.todos.splice(todoIndex, 1);
+//   saveToStorage();
+// }
+
+function deleteTodo(selectedTodo) {
+  for (const project of todoData) {
+    const index = project.todos.findIndex(todo => todo.id === selectedTodo.id);
+    project.todos.splice(index, 1);
+  }
   saveToStorage();
 }
 
