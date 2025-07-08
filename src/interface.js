@@ -18,7 +18,7 @@ function loadProjectsList() {
   const projectBar = document.querySelector(".projects-ul");
 
   projectBar.innerHTML = "";
-
+// TESTTT
   projects.forEach((element) => {
     const projectList = document.createElement("li");
     projectList.classList.add("project");
