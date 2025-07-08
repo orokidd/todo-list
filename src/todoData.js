@@ -72,10 +72,8 @@ function newProject(id, name) {
 
 function deleteProject(projectId) {
   const index = todoData.findIndex((project) => project.id === projectId);
-  if (index !== -1) {
-    todoData.splice(index, 1);
-    saveToStorage();
-  }
+  todoData.splice(index, 1);
+  saveToStorage();
 }
 
 function newTodo(projectId, todo) {
@@ -96,23 +94,10 @@ function editTodo(projectId, todoId, updatedTodo) {
   saveToStorage();
 }
 
-// function deleteTodo(projectId, todoId) {
-//   const project = todoData.find((project) => project.id === projectId);
-//   if (project) {
-//     const todoIndex = project.todos.findIndex((todo) => todo.id === todoId);
-//     if (todoIndex !== -1) {
-//       project.todos.splice(todoIndex, 1);
-//       saveToStorage()
-//     }
-//   }
-// }
-
 function deleteTodo(project, todoId) {
   const todoIndex = project.todos.findIndex((todo) => todo.id === todoId);
-  if (todoIndex !== -1) {
-    project.todos.splice(todoIndex, 1);
-    saveToStorage();
-  }
+  project.todos.splice(todoIndex, 1);
+  saveToStorage();
 }
 
 function toggleCompletion(todo) {
