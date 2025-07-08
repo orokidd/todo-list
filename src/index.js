@@ -8,7 +8,6 @@ import {
   todayTaskHandler,
   upcomingTaskHandler,
   addTodoHandler,
-  projectsListHandler,
 } from "./interface.js";
 import { setCurrentPage } from "./state.js";
 
@@ -20,7 +19,6 @@ const initApp = (() => {
   todayTaskHandler();
   upcomingTaskHandler();
   addTodoHandler();
-  projectsListHandler();
   loadAllTask();
   setCurrentPage("alltask");
 })();

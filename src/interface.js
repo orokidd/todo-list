@@ -18,30 +18,26 @@ function loadProjectsList() {
   const projectBar = document.querySelector(".projects-ul");
 
   projectBar.innerHTML = "";
-// TESTTT
-  projects.forEach((element) => {
+
+  projects.forEach((project) => {
     const projectList = document.createElement("li");
     projectList.classList.add("project");
-    projectList.id = element.id;
-    projectList.textContent = element.name;
+    projectList.id = project.id;
+    projectList.textContent = project.name;
+
+    projectList.addEventListener("click", (event) => projectsListHandler(event, project))
 
     projectBar.appendChild(projectList);
   });
 }
 
-function projectsListHandler() {
-  const projects = document.querySelector(".projects-ul");
-  projects.addEventListener("click", (e) => {
+function projectsListHandler(e, project) {
     if (e.target.classList.contains("project")) {
-      const projectId = e.target.id;
-      const project = loadTask(projectId);
       loadSelectedTask(project);
-      setCurrentProject(projectId);
+      setCurrentProject(project.id);
       setCurrentPage("project")
       showAddTaskButton();
-    }
-  });
-}
+    }}
 
 function addTodoHandler() {
   const addNewTodoBtn = document.querySelector("#newTodoBtn");
@@ -93,4 +89,4 @@ function clearMainWindow() {
   tasksList.innerHTML = "";
 }
 
-export { loadProjectsList, showAddTaskButton, allTaskHandler, todayTaskHandler, upcomingTaskHandler, addTodoHandler, projectsListHandler, clearMainWindow };
+export { loadProjectsList, showAddTaskButton, allTaskHandler, todayTaskHandler, upcomingTaskHandler, addTodoHandler, clearMainWindow };
