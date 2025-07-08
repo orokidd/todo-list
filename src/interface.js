@@ -1,17 +1,8 @@
 import { getTodoData } from "./todoData.js";
-import {
-  loadAllTask,
-  loadTodayTask,
-  loadUpcomingTask,
-  loadTask,
-  loadSelectedTask,
-} from "./loadTasks.js";
-import { setCurrentProject, setCurrentPage, getCurrentPage } from "./state.js";
-import {
-  initAddProjectDialog,
-  initAddTodoDialog,
-  formSubmitEventListener,
-} from "./dialog.js";
+import { loadAllTask, loadTodayTask, loadUpcomingTask, loadSelectedTask } from "./loadTasks.js";
+import { setCurrentProject, setCurrentPage } from "./state.js";
+import { initAddTodoDialog } from "./dialog.js";
+import { projectsListHandler, allTaskHandler, todayTaskHandler, upcomingTaskHandler } from "./handler.js";
 
 function loadProjectsList() {
   const projects = getTodoData();
@@ -31,47 +22,24 @@ function loadProjectsList() {
   });
 }
 
-function projectsListHandler(e, project) {
-    if (e.target.classList.contains("project")) {
-      loadSelectedTask(project);
-      setCurrentProject(project.id);
-      setCurrentPage("project")
-      showAddTaskButton();
-    }}
-
-function addTodoHandler() {
+function addTodoListener() {
   const addNewTodoBtn = document.querySelector("#newTodoBtn");
   addNewTodoBtn.addEventListener("click", initAddTodoDialog);
 }
 
-function allTaskHandler() {
+function allTaskListener() {
   const allTaskBtn = document.querySelector("#all-task-btn");
-
-  allTaskBtn.addEventListener("click", () => {
-    loadAllTask();
-    setCurrentPage("alltask")
-    hideAddTaskButton();
-  });
+  allTaskBtn.addEventListener("click", allTaskHandler);
 }
 
-function todayTaskHandler() {
+function todayTaskListener() {
   const todayTaskBtn = document.querySelector("#today-task-btn");
-
-  todayTaskBtn.addEventListener("click", () => {
-    loadTodayTask();
-    setCurrentPage("todaytask")
-    hideAddTaskButton();
-  });
+  todayTaskBtn.addEventListener("click", todayTaskHandler);
 }
 
-function upcomingTaskHandler() {
+function upcomingTaskListener() {
   const todayTaskBtn = document.querySelector("#upcoming-task-btn");
-
-  todayTaskBtn.addEventListener("click", () => {
-    loadUpcomingTask();
-    setCurrentPage("upcomingtask")
-    hideAddTaskButton();
-  });
+  todayTaskBtn.addEventListener("click", upcomingTaskHandler);
 }
 
 function showAddTaskButton() {
@@ -89,4 +57,4 @@ function clearMainWindow() {
   tasksList.innerHTML = "";
 }
 
-export { loadProjectsList, showAddTaskButton, allTaskHandler, todayTaskHandler, upcomingTaskHandler, addTodoHandler, clearMainWindow };
+export { loadProjectsList, showAddTaskButton, allTaskListener, todayTaskListener, upcomingTaskListener, addTodoListener, clearMainWindow, hideAddTaskButton };

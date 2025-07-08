@@ -4,10 +4,10 @@ import { loadAllTask } from "./loadTasks.js";
 import {
   showAddTaskButton,
   loadProjectsList,
-  allTaskHandler,
-  todayTaskHandler,
-  upcomingTaskHandler,
-  addTodoHandler,
+  allTaskListener,
+  todayTaskListener,
+  upcomingTaskListener,
+  addTodoListener,
 } from "./interface.js";
 import { setCurrentPage } from "./state.js";
 
@@ -15,10 +15,10 @@ const initApp = (() => {
   initAddProjectDialog();
   formSubmitEventListener();
   loadProjectsList();
-  allTaskHandler();
-  todayTaskHandler();
-  upcomingTaskHandler();
-  addTodoHandler();
+  allTaskListener();
+  todayTaskListener();
+  upcomingTaskListener();
+  addTodoListener();
   loadAllTask();
   setCurrentPage("alltask");
 })();
