@@ -1,58 +1,3 @@
-// const todoData = [
-//     {
-//       id: "p1",
-//       name: "Personal",
-//       todos: [
-//         {
-//           id: "t1",
-//           title: "Buy groceries",
-//           desc: "Milk, eggs, bread",
-//           dueDate: "2025-05-20",
-//           priority: "High",
-//           completed: false,
-//         },
-//         {
-//           id: "t2",
-//           title: "Call mom",
-//           desc: "Ay check it bro",
-//           dueDate: "2025-05-21",
-//           priority: "Low",
-//           completed: true,
-//         }
-//       ]
-//     },
-//     {
-//       id: "p2",
-//       name: "Work",
-//       todos: [
-//         {
-//           id: "t1",
-//           title: "Submit report",
-//           desc: "Q1 Financials",
-//           dueDate: "2025-04-22",
-//           priority: "Medium",
-//           completed: false,
-//         },
-//         {
-//           id: "t2",
-//           title: "Submit design",
-//           desc: "Q2 Visual design",
-//           dueDate: "2025-05-24",
-//           priority: "Low",
-//           completed: true,
-//         },
-//         {
-//           id: "t3",
-//           title: "Submit assignment",
-//           desc: "Q3 Midtterm",
-//           dueDate: "2025-06-26",
-//           priority: "High",
-//           completed: false,
-//         }
-//       ]
-//     }
-//   ];
-
 const STORAGE_KEY = "todoData";
 
 let todoData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -77,28 +22,18 @@ function deleteProject(projectId) {
 }
 
 function newTodo(projectId, todo) {
-  const project = todoData.findIndex((project) => project.id === projectId);
-  todoData[project].todos.push(todo);
+  const selectedProject = todoData.find((project) => project.id === projectId);
+  selectedProject.todos.push(todo);
   saveToStorage();
 }
 
-function editTodo(projectId, todoId, updatedTodo) {
-  const projectIndex = todoData.findIndex(
-    (project) => project.id === projectId
-  );
-  const todoIndex = todoData[projectIndex].todos.findIndex(
-    (todo) => todo.id === todoId
-  );
-
-  todoData[projectIndex].todos[todoIndex] = updatedTodo;
+function editTodo(oldTodoId, updatedTodo) {
+  for (const project of todoData) {
+    const index = project.todos.findIndex(todo => todo.id === oldTodoId);
+    project.todos[index] = updatedTodo;
+  }
   saveToStorage();
 }
-
-// function deleteTodo(project, todoId) {
-//   const todoIndex = project.todos.findIndex((todo) => todo.id === todoId);
-//   project.todos.splice(todoIndex, 1);
-//   saveToStorage();
-// }
 
 function deleteTodo(selectedTodo) {
   for (const project of todoData) {

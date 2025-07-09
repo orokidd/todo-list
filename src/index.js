@@ -1,5 +1,5 @@
 import "./styles.css";
-import { initAddProjectDialog, formSubmitEventListener } from "./dialog.js";
+import { initDialogListeners } from "./dialog.js";
 import { loadAllTask } from "./loadTasks.js";
 import {
   showAddTaskButton,
@@ -7,18 +7,15 @@ import {
   allTaskListener,
   todayTaskListener,
   upcomingTaskListener,
-  addTodoListener,
 } from "./interface.js";
 import { setCurrentPage } from "./state.js";
 
 const initApp = (() => {
-  initAddProjectDialog();
-  formSubmitEventListener();
+  initDialogListeners();
   loadProjectsList();
   allTaskListener();
   todayTaskListener();
   upcomingTaskListener();
-  addTodoListener();
   loadAllTask();
   setCurrentPage("alltask");
 })();

@@ -22,11 +22,6 @@ function loadProjectsList() {
   });
 }
 
-function addTodoListener() {
-  const addNewTodoBtn = document.querySelector("#newTodoBtn");
-  addNewTodoBtn.addEventListener("click", initAddTodoDialog);
-}
-
 function allTaskListener() {
   const allTaskBtn = document.querySelector("#all-task-btn");
   allTaskBtn.addEventListener("click", allTaskHandler);
@@ -57,4 +52,4 @@ function clearMainWindow() {
   tasksList.innerHTML = "";
 }
 
-export { loadProjectsList, showAddTaskButton, allTaskListener, todayTaskListener, upcomingTaskListener, addTodoListener, clearMainWindow, hideAddTaskButton };
+export { loadProjectsList, showAddTaskButton, allTaskListener, todayTaskListener, upcomingTaskListener, clearMainWindow, hideAddTaskButton };
