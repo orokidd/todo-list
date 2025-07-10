@@ -2,6 +2,7 @@ import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
 import { getCurrentProject } from "./state.js";
 import { clearMainWindow, changeHeaderName, loadTaskDom } from "./interface.js";
+import { isToday } from "date-fns";
 
 function getSelectedProject() {
   const projects = getTodoData();
@@ -20,10 +21,10 @@ function getAllTodos() {
 
 function getTodayTodos() {
   const projects = getTodoData();
-  const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+  // const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
 
   const todayTodos = projects.flatMap(project =>
-    project.todos.filter(todo => todo.dueDate === today)
+    project.todos.filter(todo => isToday(todo.dueDate))
   );
 
   return todayTodos;
