@@ -30,7 +30,9 @@ function newTodo(projectId, todo) {
 function editTodo(oldTodoId, updatedTodo) {
   for (const project of todoData) {
     const index = project.todos.findIndex(todo => todo.id === oldTodoId);
-    project.todos[index] = updatedTodo;
+    if (index !== -1) {
+      project.todos[index] = updatedTodo;
+    }
   }
   saveToStorage();
 }
