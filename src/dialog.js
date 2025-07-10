@@ -6,7 +6,7 @@ import {
 } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
 import { loadProjectsList } from "./interface.js";
-import { loadTask, loadSelectedTask, updateUI } from "./loadTasks.js";
+import { updateUI } from "./loadTasks.js";
 
 function addProjectDialog() {
   const addProjectBtn = document.getElementById("newProjectBtn");

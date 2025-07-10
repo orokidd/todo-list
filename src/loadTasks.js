@@ -1,7 +1,7 @@
 import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
 import { setCurrentProject, setCurrentTodo, getCurrentPage, getCurrentProject } from "./state.js";
-import { clearMainWindow } from "./interface.js";
+import { clearMainWindow, changeHeaderName } from "./interface.js";
 
 function getSelectedProject() {
   const projects = getTodoData();
@@ -45,12 +45,10 @@ function getUpcomingTodos() {
   return upcomingTodos
 }
 
-function loadSelectedTask() {
-  clearMainWindow();
-
+function loadSelectedProject() {
   const selectedProject = getSelectedProject();
-  const projectName = document.querySelector(".header-left");
-  projectName.textContent = selectedProject.name;
+  clearMainWindow();
+  changeHeaderName(selectedProject.name);
 
   selectedProject.todos.forEach((task) => {
     loadTaskDom(task);
@@ -59,10 +57,9 @@ function loadSelectedTask() {
 
 function loadAllTask() {
   clearMainWindow();
+  changeHeaderName("All Tasks");
 
-  const projectName = document.querySelector(".header-left");
   const allTodos = getAllTodos();
-  projectName.textContent = "All Tasks";
 
   allTodos.forEach((task) => {
     loadTaskDom(task);
@@ -71,10 +68,9 @@ function loadAllTask() {
 
 function loadTodayTask() {
   clearMainWindow();
+  changeHeaderName("Today Tasks");
 
-  const projectName = document.querySelector(".header-left");
   const todayTodos = getTodayTodos();
-  projectName.textContent = "Today Tasks";
 
   todayTodos.forEach((task) => {
     loadTaskDom(task);
@@ -83,10 +79,9 @@ function loadTodayTask() {
 
 function loadUpcomingTask() {
   clearMainWindow();
+  changeHeaderName("Upcoming Tasks");
 
-  const projectName = document.querySelector(".header-left");
   const upcomingTodos = getUpcomingTodos();
-  projectName.textContent = "Upcoming Tasks";
 
   upcomingTodos.forEach((task) => {
     loadTaskDom(task);
@@ -164,13 +159,13 @@ function updateUI() {
     loadUpcomingTask();
     break;
   case "project":
-    loadSelectedTask();
+    loadSelectedProject();
     break;
 }
 }
 
 export {
-  loadSelectedTask,
+  loadSelectedProject,
   loadAllTask,
   loadTodayTask,
   loadUpcomingTask,
