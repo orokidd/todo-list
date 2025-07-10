@@ -38,7 +38,9 @@ function editTodo(oldTodoId, updatedTodo) {
 function deleteTodo(selectedTodo) {
   for (const project of todoData) {
     const index = project.todos.findIndex(todo => todo.id === selectedTodo.id);
-    project.todos.splice(index, 1);
+    if (index !== -1) { // to avoid splice(-1, 1) when no match was found, which removes the last todo
+      project.todos.splice(index, 1);
+    }
   }
   saveToStorage();
 }
