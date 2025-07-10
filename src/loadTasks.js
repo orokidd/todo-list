@@ -32,17 +32,15 @@ function getTodayTodos() {
 function getUpcomingTodos() {
   const projects = getTodoData();
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time for accurate date comparison
 
   const upcomingTodos = projects.flatMap(project =>
     project.todos.filter(todo => {
       const dueDate = new Date(todo.dueDate);
-      dueDate.setHours(0, 0, 0, 0); // Normalize time
-      todo.dueDate > today;
+      return dueDate > today;
     })
   );
 
-  return upcomingTodos
+  return upcomingTodos;
 }
 
 function loadSelectedProject() {
