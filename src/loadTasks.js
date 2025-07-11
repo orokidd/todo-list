@@ -97,7 +97,7 @@ function loadTodayTask() {
 
 function loadThisWeekTask() {
   clearMainWindow();
-  changeHeaderName("Today Tasks");
+  changeHeaderName("This Week Tasks");
 
   const weekTodos = getThisWeekTodos();
 
@@ -108,7 +108,7 @@ function loadThisWeekTask() {
 
 function loadThisMonthTask() {
   clearMainWindow();
-  changeHeaderName("Today Tasks");
+  changeHeaderName("This Month Tasks");
 
   const monthTodos = getThisMonthTodos();
 

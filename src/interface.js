@@ -27,8 +27,7 @@ function projectsListHandler(e, project) {
       setCurrentPage("project")
       loadSelectedProject();
       showAddTaskButton();
-      clearActiveClass();
-      addActiveClass(e.target)
+      refreshSelectedCategoryDisplay(e.target)
     }}
 
 function allTaskListener() {
@@ -37,8 +36,7 @@ function allTaskListener() {
     loadAllTask();
     setCurrentPage("alltask");
     hideAddTaskButton();
-    clearActiveClass();
-    addActiveClass(e.target)
+    refreshSelectedCategoryDisplay(e.target)
   });
 }
 
@@ -48,8 +46,7 @@ function todayTaskListener() {
     loadTodayTask();
     setCurrentPage("todaytask");
     hideAddTaskButton();
-    clearActiveClass();
-    addActiveClass(e.target)
+    refreshSelectedCategoryDisplay(e.target)
   });
 }
 
@@ -59,8 +56,7 @@ function weekTaskListener() {
     loadThisWeekTask();
     setCurrentPage("weektask");
     hideAddTaskButton();
-    clearActiveClass();
-    addActiveClass(e.target)
+    refreshSelectedCategoryDisplay(e.target)
   });
 }
 
@@ -70,8 +66,7 @@ function monthTaskListener() {
     loadThisMonthTask();
     setCurrentPage("monthtask");
     hideAddTaskButton();
-    clearActiveClass();
-    addActiveClass(e.target)
+    refreshSelectedCategoryDisplay(e.target)
   });
 }
 
@@ -177,8 +172,13 @@ function checkPriority(priority) {
 
 }
 
+function refreshSelectedCategoryDisplay(element) {
+  clearActiveClass();
+  addActiveClass(element);
+}
+
 function addActiveClass(element) {
-  element.classList.add("active")
+  element.classList.add("active");
 }
 
 function clearActiveClass() {
