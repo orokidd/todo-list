@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./styles2.css";
 import { initDialogListeners } from "./dialog.js";
 import { initProjectsDisplay } from "./interface.js";
 

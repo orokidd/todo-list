@@ -27,41 +27,51 @@ function projectsListHandler(e, project) {
       setCurrentPage("project")
       loadSelectedProject();
       showAddTaskButton();
+      clearActiveClass();
+      addActiveClass(e.target)
     }}
 
 function allTaskListener() {
   const allTaskBtn = document.querySelector("#all-task-btn");
-  allTaskBtn.addEventListener("click", () => {
+  allTaskBtn.addEventListener("click", (e) => {
     loadAllTask();
     setCurrentPage("alltask");
     hideAddTaskButton();
+    clearActiveClass();
+    addActiveClass(e.target)
   });
 }
 
 function todayTaskListener() {
   const todayTaskBtn = document.querySelector("#today-task-btn");
-  todayTaskBtn.addEventListener("click", () => {
+  todayTaskBtn.addEventListener("click", (e) => {
     loadTodayTask();
     setCurrentPage("todaytask");
     hideAddTaskButton();
+    clearActiveClass();
+    addActiveClass(e.target)
   });
 }
 
 function weekTaskListener() {
   const weekTaskBtn = document.querySelector("#week-task-btn");
-  weekTaskBtn.addEventListener("click", () => {
+  weekTaskBtn.addEventListener("click", (e) => {
     loadThisWeekTask();
     setCurrentPage("weektask");
     hideAddTaskButton();
+    clearActiveClass();
+    addActiveClass(e.target)
   });
 }
 
 function monthTaskListener() {
   const monthTaskBtn = document.querySelector("#month-task-btn");
-  monthTaskBtn.addEventListener("click", () => {
+  monthTaskBtn.addEventListener("click", (e) => {
     loadThisMonthTask();
     setCurrentPage("monthtask");
     hideAddTaskButton();
+    clearActiveClass();
+    addActiveClass(e.target)
   });
 }
 
@@ -165,6 +175,15 @@ function checkPriority(priority) {
     return "priority-low"
 }
 
+}
+
+function addActiveClass(element) {
+  element.classList.add("active")
+}
+
+function clearActiveClass() {
+  const listItems = document.querySelectorAll("ul li.active");
+  listItems.forEach(item => item.classList.remove("active"));
 }
 
 function changeHeaderName(name) {
