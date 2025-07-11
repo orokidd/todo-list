@@ -1,7 +1,7 @@
 import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
-import { loadAllTask, loadTodayTask, loadUpcomingTask, loadSelectedProject } from "./loadTasks.js";
-import { setCurrentProject, setCurrentPage, setCurrentTodo, getCurrentPage,  } from "./state.js";
+import { loadAllTask, loadTodayTask, loadThisWeekTask, loadThisMonthTask, loadSelectedProject } from "./loadTasks.js";
+import { setCurrentProject, setCurrentPage, setCurrentTodo, getCurrentPage  } from "./state.js";
 
 function loadProjectsList() {
   const projects = getTodoData();
@@ -47,11 +47,20 @@ function todayTaskListener() {
   });
 }
 
-function upcomingTaskListener() {
-  const todayTaskBtn = document.querySelector("#upcoming-task-btn");
-  todayTaskBtn.addEventListener("click", () => {
-    loadUpcomingTask();
-    setCurrentPage("upcomingtask")
+function weekTaskListener() {
+  const weekTaskBtn = document.querySelector("#week-task-btn");
+  weekTaskBtn.addEventListener("click", () => {
+    loadThisWeekTask();
+    setCurrentPage("weektask");
+    hideAddTaskButton();
+  });
+}
+
+function monthTaskListener() {
+  const monthTaskBtn = document.querySelector("#month-task-btn");
+  monthTaskBtn.addEventListener("click", () => {
+    loadThisMonthTask();
+    setCurrentPage("monthtask");
     hideAddTaskButton();
   });
 }
@@ -123,8 +132,11 @@ function updateUI() {
   case "todaytask":
     loadTodayTask();
     break;
-  case "upcomingtask":
-    loadUpcomingTask();
+  case "weektask":
+    loadThisWeekTask();
+    break;
+  case "monthtask":
+    loadThisMonthTask();
     break;
   case "project":
     loadSelectedProject();
@@ -152,4 +164,18 @@ function clearMainWindow() {
   tasksList.innerHTML = "";
 }
 
-export { loadProjectsList, showAddTaskButton, allTaskListener, todayTaskListener, upcomingTaskListener, clearMainWindow, hideAddTaskButton, changeHeaderName, loadTaskDom, updateUI };
+function initialLoad() {
+  
+}
+
+function initProjectsDisplay() {
+  loadProjectsList();
+  allTaskListener();
+  todayTaskListener();
+  weekTaskListener();
+  monthTaskListener();
+  loadAllTask();
+  setCurrentPage("alltask");
+}
+
+export { initProjectsDisplay, loadProjectsList, clearMainWindow, changeHeaderName, loadTaskDom, updateUI };

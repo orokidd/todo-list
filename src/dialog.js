@@ -1,9 +1,4 @@
-import {
-  getCurrentProject,
-  getCurrentTodo,
-  setCurrentForm,
-  getCurrentForm,
-} from "./state.js";
+import { getCurrentProject, getCurrentTodo, setCurrentForm, getCurrentForm } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
 import { loadProjectsList, updateUI } from "./interface.js";
 

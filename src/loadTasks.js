@@ -29,7 +29,7 @@ function getTodayTodos() {
   return todayTodos;
 }
 
-function getWeekTodos() {
+function getThisWeekTodos() {
   const projects = getTodoData();
 
   const weekTodos = projects.flatMap(project =>
@@ -39,7 +39,7 @@ function getWeekTodos() {
   return weekTodos;
 }
 
-function getMonthTodos() {
+function getThisMonthTodos() {
   const projects = getTodoData();
 
   const monthTodos = projects.flatMap(project =>
@@ -95,13 +95,24 @@ function loadTodayTask() {
   });
 }
 
-function loadUpcomingTask() {
+function loadThisWeekTask() {
   clearMainWindow();
-  changeHeaderName("Upcoming Tasks");
+  changeHeaderName("Today Tasks");
 
-  const upcomingTodos = getUpcomingTodos();
+  const weekTodos = getThisWeekTodos();
 
-  upcomingTodos.forEach((task) => {
+  weekTodos.forEach((task) => {
+    loadTaskDom(task);
+  });
+}
+
+function loadThisMonthTask() {
+  clearMainWindow();
+  changeHeaderName("Today Tasks");
+
+  const monthTodos = getThisMonthTodos();
+
+  monthTodos.forEach((task) => {
     loadTaskDom(task);
   });
 }
@@ -110,7 +121,8 @@ export {
   loadSelectedProject,
   loadAllTask,
   loadTodayTask,
-  loadUpcomingTask,
+  loadThisWeekTask,
+  loadThisMonthTask,
   getTodayTodos,
   getUpcomingTodos,
 };
