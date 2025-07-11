@@ -70,9 +70,10 @@ function loadTaskDom(task) {
 
   const taskItem = document.createElement("li");
   const taskDataContainer = document.createElement("div");
+  const taskDetailsContainer = document.createElement("div");
   const taskOptionsContainer = document.createElement("div");
 
-  const taskTitle = document.createElement("h2");
+  const taskTitle = document.createElement("p");
   const taskDescription = document.createElement("p");
   const taskDate = document.createElement("p");
   const taskPriority = document.createElement("p");
@@ -80,16 +81,25 @@ function loadTaskDom(task) {
   const deleteTask = document.createElement("button");
   const checkbox = document.createElement("input");
 
+  taskItem.className = "todo-item"
   taskDataContainer.className = "task-data";
+  taskDetailsContainer.className = "task-details";
   taskOptionsContainer.className = "task-actions";
+
+  taskTitle.className = "todo-title"
+  taskDescription.className = "todo-desc"
+  taskDate.className = "todo-date"
+  taskPriority.className = "todo-priority" 
+  taskPriority.classList.add(checkPriority(task.priority))
 
   checkbox.type = "checkbox";
   checkbox.checked = task.completed;
 
   editTask.textContent = "Edit";
   deleteTask.textContent = "Delete";
-  taskDescription.textContent = task.desc;
   taskTitle.textContent = task.title;
+  taskDescription.textContent = task.desc;
+  
   taskDate.textContent = `Due: ${task.dueDate}`;
   taskPriority.textContent = task.priority;
 
@@ -114,10 +124,11 @@ function loadTaskDom(task) {
     updateUI();
   });
 
-  taskDataContainer.append(taskTitle, taskDescription, taskDate, taskPriority);
+  taskDataContainer.append(taskTitle, taskDescription);
+  taskDetailsContainer.append(taskDate, taskPriority)
   taskOptionsContainer.append(checkbox, editTask, deleteTask);
 
-  taskItem.append(taskDataContainer, taskOptionsContainer);
+  taskItem.append(taskDataContainer, taskDetailsContainer, taskOptionsContainer);
   tasksList.appendChild(taskItem);
 }
 
@@ -144,6 +155,18 @@ function updateUI() {
 }
 }
 
+function checkPriority(priority) {
+    switch (priority) {
+  case "high":
+    return "priority-high"
+  case "medium":
+    return "priority-medium"
+  case "low":
+    return "priority-low"
+}
+
+}
+
 function changeHeaderName(name) {
   const projectName = document.querySelector(".header-left");
   projectName.textContent = name;
@@ -164,9 +187,9 @@ function clearMainWindow() {
   tasksList.innerHTML = "";
 }
 
-function initialLoad() {
+// function initialLoad() {
   
-}
+// }
 
 function initProjectsDisplay() {
   loadProjectsList();
