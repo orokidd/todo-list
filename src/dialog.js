@@ -33,8 +33,10 @@ function projectSubmitListener() {
 
 function addTodoDialog() {
   const addNewTodoBtn = document.querySelector("#newTodoBtn");
+  const closeNewTodoBtn = document.querySelector("#cancelTodo")
+  const dialog = document.getElementById("todoDialog");
+
   addNewTodoBtn.addEventListener("click", () => {
-    const dialog = document.getElementById("todoDialog");
     dialog.showModal();
     setCurrentForm("add");
 
@@ -43,6 +45,10 @@ function addTodoDialog() {
     document.getElementById("taskDueDate").value = "";
     document.getElementById("taskPriority").value = "Low";
   });
+
+  closeNewTodoBtn.addEventListener("click", () => {
+    dialog.close();
+  })
 }
 
 function initEditTodoDialog(todo) {
