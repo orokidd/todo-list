@@ -9,6 +9,13 @@ ul {
   list-style: none;
 }
 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
@@ -30,6 +37,7 @@ body {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   padding: 2rem 1.5rem;
+  border-right: 1px solid #e2e8f0;
 }
 
 .sidebar h1 {
@@ -76,11 +84,7 @@ body {
 }
 
 #newProjectBtn {
-  border: none;
-  background: none;
-  cursor: pointer;
   font-size: 1.2rem;
-  transition: all 0.2s ease;
 }
 
 #newProjectBtn:hover {
@@ -108,7 +112,6 @@ body {
 .header-left {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1e293b;
 }
 
 .header-actions {
@@ -117,31 +120,25 @@ body {
 }
 
 #newTodoBtn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: rgb(91, 98, 85);
   color: white;
-  border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #newTodoBtn:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background-color: rgb(84, 87, 81);
 }
 
 /* Tasks Section */
 .tasks-wrapper {
   flex: 1;
   padding: 2rem;
-  overflow-y: auto;
 }
 
 .main-tasks {
-  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -149,16 +146,15 @@ body {
 
 /* Task Item */
 .todo-item {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
 }
 
 .todo-item:hover {
@@ -172,7 +168,6 @@ body {
 .todo-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1e293b;
 }
 
 .todo-desc {
@@ -189,7 +184,6 @@ body {
 .todo-date {
   font-size: 0.875rem;
   color: #64748b;
-  font-weight: 500;
 }
 
 .todo-priority {
@@ -197,7 +191,6 @@ body {
   font-weight: 600;
   padding: 0.25rem 0.75rem;
   border-radius: 14px;
-  text-align: center;
   text-transform: uppercase;
 }
 
@@ -230,10 +223,7 @@ body {
 
 .task-actions button {
   padding: 0.5rem 1rem;
-  border: none;
   border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 #edit-task-button {
@@ -258,14 +248,10 @@ body {
 
 /* Dialog Styles */
 dialog {
-  padding: 0;
   border: none;
   border-radius: 12px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  background: white;
-  max-width: 500px;
-  width: 90%;
+  min-width: 500px;
+  margin: auto; /* center vertically and horizontally */
 }
 
 dialog::backdrop {
@@ -281,37 +267,20 @@ dialog label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #374151;
 }
 
-dialog input,
-dialog textarea,
-dialog select {
+dialog input, dialog textarea,dialog select {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #d1d5db;
   border-radius: 6px;
   margin-bottom: 1.5rem;
   font-size: 1rem;
-  transition: border-color 0.2s ease;
-}
-
-dialog input:focus,
-dialog textarea:focus,
-dialog select:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 dialog textarea {
   resize: vertical;
   min-height: 80px;
-}
-
-dialog input[type="checkbox"] {
-  width: auto;
-  margin-right: 0.5rem;
 }
 
 dialog menu {
@@ -325,20 +294,15 @@ dialog menu {
 
 dialog button {
   padding: 0.75rem 1.5rem;
-  border: none;
   border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
 }
 
 dialog button[type="submit"] {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: rgb(91, 98, 85);
   color: white;
 }
 
 dialog button[type="submit"]:hover {
-  transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
