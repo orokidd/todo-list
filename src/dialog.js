@@ -37,6 +37,17 @@ function addTodoDialog() {
   const dialog = document.getElementById("todoDialog");
 
   addNewTodoBtn.addEventListener("click", () => {
+    const projects = getTodoData();
+    const select = document.getElementById("taskProject");
+    select.innerHTML = ""
+
+    projects.forEach(project => {
+      const option = document.createElement("option");
+      option.id = project.id;
+      option.value = project.name;
+      option.textContent = project.name;
+      select.appendChild(option);
+    });
     dialog.showModal();
     setCurrentForm("add");
   });
@@ -82,7 +93,8 @@ function todoSubmitHandler(e) {
       };
       editTodo(currentTodoId, newTodo);
     } else {
-
+      const projectSelect = document.getElementById("taskProject");
+      const projectId = projectSelect.options[projectSelect.selectedIndex].id;
       const task = {
         id: crypto.randomUUID(),
         title: document.getElementById("taskTitle").value,
@@ -91,7 +103,7 @@ function todoSubmitHandler(e) {
         priority: document.getElementById("taskPriority").value,
         completed: false,
       };
-      newTodo(currentProjectId, task);
+      newTodo(projectId, task);
     }
     // const project = loadTask(currentProjectId);
     updateUI();
