@@ -35,7 +35,6 @@ function projectsListHandler(e, project) {
   setCurrentProject(project.id);
   setCurrentPage("project")
   loadSelectedProject();
-  showAddTaskButton();
   refreshSelectedCategoryDisplay(e.target)
 }
 
@@ -50,7 +49,6 @@ function allTaskListener() {
   allTaskBtn.addEventListener("click", (e) => {
     loadAllTask();
     setCurrentPage("alltask");
-    hideAddTaskButton();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
@@ -60,7 +58,6 @@ function todayTaskListener() {
   todayTaskBtn.addEventListener("click", (e) => {
     loadTodayTask();
     setCurrentPage("todaytask");
-    hideAddTaskButton();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
@@ -70,7 +67,6 @@ function weekTaskListener() {
   weekTaskBtn.addEventListener("click", (e) => {
     loadThisWeekTask();
     setCurrentPage("weektask");
-    hideAddTaskButton();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
@@ -80,7 +76,6 @@ function monthTaskListener() {
   monthTaskBtn.addEventListener("click", (e) => {
     loadThisMonthTask();
     setCurrentPage("monthtask");
-    hideAddTaskButton();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
@@ -183,8 +178,11 @@ function checkPriority(priority) {
     return "priority-medium"
   case "low":
     return "priority-low"
-}
+}}
 
+function initialAllTaskActiveClass() {
+  const allTaskBtn = document.querySelector("#all-task-btn");
+  refreshSelectedCategoryDisplay(allTaskBtn)
 }
 
 function refreshSelectedCategoryDisplay(element) {
@@ -232,6 +230,7 @@ function initProjectsDisplay() {
   weekTaskListener();
   monthTaskListener();
   loadAllTask();
+  initialAllTaskActiveClass();
   setCurrentPage("alltask");
 }
 
