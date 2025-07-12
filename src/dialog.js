@@ -37,17 +37,7 @@ function addTodoDialog() {
   const dialog = document.getElementById("todoDialog");
 
   addNewTodoBtn.addEventListener("click", () => {
-    const projects = getTodoData();
-    const select = document.getElementById("taskProject");
-    select.innerHTML = ""
-
-    projects.forEach(project => {
-      const option = document.createElement("option");
-      option.id = project.id;
-      option.value = project.name;
-      option.textContent = project.name;
-      select.appendChild(option);
-    });
+    loadProjectOptions()
     dialog.showModal();
     setCurrentForm("add");
   });
@@ -57,8 +47,28 @@ function addTodoDialog() {
   })
 }
 
+function loadProjectOptions() {
+  const select = document.getElementById("taskProject");
+  const projectSelectLabel = document.getElementById("task-project-label"); 
+  const projects = getTodoData();
+  select.innerHTML = ""
+  select.style.display = "block"
+  projectSelectLabel.style.display = "block"
+
+  projects.forEach(project => {
+    const option = document.createElement("option");
+    option.value = project.name;
+    option.textContent = project.name;
+    select.appendChild(option);
+    option.id = project.id;
+  });
+}
+
 function initEditTodoDialog(todo) {
   const dialog = document.getElementById("todoDialog");
+  const projectSelect = document.getElementById("taskProject"); 
+  const projectSelectLabel = document.getElementById("task-project-label"); 
+
   dialog.showModal();
   setCurrentForm("edit");
 
@@ -67,6 +77,8 @@ function initEditTodoDialog(todo) {
   document.getElementById("taskDueDate").value = todo.dueDate;
   document.getElementById("taskPriority").value = todo.priority;
   document.getElementById("taskStatus").checked = todo.completed;
+  projectSelect.style.display = "none"
+  projectSelectLabel.style.display = "none"
 }
 
 function todoSubmitListener() {
@@ -105,7 +117,6 @@ function todoSubmitHandler(e) {
       };
       newTodo(projectId, task);
     }
-    // const project = loadTask(currentProjectId);
     updateUI();
     dialog.close();
     form.reset();
