@@ -76,6 +76,11 @@ body {
   margin-top: 1.6rem;
 }
 
+.project {
+  display: flex;
+  justify-content: space-between;
+}
+
 .sidebar-project-header {
   display: flex;
   justify-content: space-between;
@@ -313,6 +318,10 @@ dialog button[type="button"] {
 
 dialog button[type="button"]:hover {
   background: #e5e7eb;
+}
+
+dialog input[type="checkbox"] {
+  display: none;
 }
 
 /* Responsive Design */

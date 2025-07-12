@@ -39,11 +39,6 @@ function addTodoDialog() {
   addNewTodoBtn.addEventListener("click", () => {
     dialog.showModal();
     setCurrentForm("add");
-
-    document.getElementById("taskTitle").value = "";
-    document.getElementById("taskDescription").value = "";
-    document.getElementById("taskDueDate").value = "";
-    document.getElementById("taskPriority").value = "Low";
   });
 
   closeNewTodoBtn.addEventListener("click", () => {
@@ -60,6 +55,7 @@ function initEditTodoDialog(todo) {
   document.getElementById("taskDescription").value = todo.desc;
   document.getElementById("taskDueDate").value = todo.dueDate;
   document.getElementById("taskPriority").value = todo.priority;
+  document.getElementById("taskStatus").checked = todo.completed;
 }
 
 function todoSubmitListener() {

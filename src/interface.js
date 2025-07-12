@@ -1,4 +1,4 @@
-import { getTodoData, deleteTodo, toggleCompletion } from "./todoData.js";
+import { getTodoData, deleteTodo, toggleCompletion, deleteProject } from "./todoData.js";
 import { initEditTodoDialog } from "./dialog.js";
 import { loadAllTask, loadTodayTask, loadThisWeekTask, loadThisMonthTask, loadSelectedProject } from "./loadTasks.js";
 import { setCurrentProject, setCurrentPage, setCurrentTodo, getCurrentPage  } from "./state.js";
@@ -11,24 +11,39 @@ function loadProjectsList() {
 
   projects.forEach((project) => {
     const projectList = document.createElement("li");
+    // const projectName = document.createElement("p")
+    const deleteProjButton = document.createElement("button")
+
     projectList.classList.add("project");
     projectList.id = project.id;
+
+    // projectName.classList.add("project-name");
     projectList.textContent = project.name;
 
-    projectList.addEventListener("click", (event) => projectsListHandler(event, project))
+    deleteProjButton.classList.add("project-delete");
+    deleteProjButton.textContent = "X"
 
+    projectList.addEventListener("click", (event) => projectsListHandler(event, project))
+    deleteProjButton.addEventListener("click", deleteProjectHandler)
+
+    projectList.append(deleteProjButton)
     projectBar.appendChild(projectList);
   });
 }
 
 function projectsListHandler(e, project) {
-    if (e.target.classList.contains("project")) {
-      setCurrentProject(project.id);
-      setCurrentPage("project")
-      loadSelectedProject();
-      showAddTaskButton();
-      refreshSelectedCategoryDisplay(e.target)
-    }}
+  setCurrentProject(project.id);
+  setCurrentPage("project")
+  loadSelectedProject();
+  showAddTaskButton();
+  refreshSelectedCategoryDisplay(e.target)
+}
+
+function deleteProjectHandler(event) {
+  event.stopPropagation();
+  deleteProject(event.target.parentElement.id);
+  event.target.parentElement.remove()
+}
 
 function allTaskListener() {
   const allTaskBtn = document.querySelector("#all-task-btn");
