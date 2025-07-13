@@ -1,4 +1,4 @@
-import { getCurrentProject, getCurrentTodo, setCurrentForm, getCurrentForm } from "./state.js";
+import { getCurrentTodo, setCurrentForm, getCurrentForm } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
 import { loadProjectsList, updateUI } from "./interface.js";
 
@@ -49,11 +49,10 @@ function addTodoDialog() {
 
 function loadProjectOptions() {
   const select = document.getElementById("taskProject");
-  const projectSelectLabel = document.getElementById("task-project-label"); 
   const projects = getTodoData();
+
   select.innerHTML = ""
-  select.style.display = "block"
-  projectSelectLabel.style.display = "block"
+  showProjectSelection()
 
   projects.forEach(project => {
     const option = document.createElement("option");
@@ -66,19 +65,16 @@ function loadProjectOptions() {
 
 function initEditTodoDialog(todo) {
   const dialog = document.getElementById("todoDialog");
-  const projectSelect = document.getElementById("taskProject"); 
-  const projectSelectLabel = document.getElementById("task-project-label"); 
 
   dialog.showModal();
   setCurrentForm("edit");
+  hideProjectSelection()
 
   document.getElementById("taskTitle").value = todo.title;
   document.getElementById("taskDescription").value = todo.desc;
   document.getElementById("taskDueDate").value = todo.dueDate;
   document.getElementById("taskPriority").value = todo.priority;
   document.getElementById("taskStatus").checked = todo.completed;
-  projectSelect.style.display = "none"
-  projectSelectLabel.style.display = "none"
 }
 
 function todoSubmitListener() {
@@ -90,7 +86,6 @@ function todoSubmitHandler(e) {
   e.preventDefault();
   const dialog = document.getElementById("todoDialog");
   const form = document.getElementById("todoForm");
-  const currentProjectId = getCurrentProject();
   const currentTodoId = getCurrentTodo();
   const currentFormMode = getCurrentForm();
 
@@ -120,6 +115,22 @@ function todoSubmitHandler(e) {
     updateUI();
     dialog.close();
     form.reset();
+}
+
+function hideProjectSelection() {
+  const projectSelect = document.getElementById("taskProject"); 
+  const projectSelectLabel = document.getElementById("task-project-label"); 
+
+  projectSelect.style.display = "none"
+  projectSelectLabel.style.display = "none"
+}
+
+function showProjectSelection() {
+  const projectSelect = document.getElementById("taskProject"); 
+  const projectSelectLabel = document.getElementById("task-project-label"); 
+
+  projectSelect.style.display = "block"
+  projectSelectLabel.style.display = "block"
 }
 
 function initDialogListeners() {
