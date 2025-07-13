@@ -41,7 +41,7 @@ function projectsListHandler(e, project) {
 function deleteProjectHandler(event) {
   event.stopPropagation();
   deleteProject(event.target.parentElement.id);
-  event.target.parentElement.remove()
+  event.target.parentElement.remove();
 }
 
 function allTaskListener() {
@@ -180,6 +180,15 @@ function checkPriority(priority) {
     return "priority-low"
 }}
 
+function loadNewAddedProject(projectId) {
+  const lastLi = document.querySelector(".projects-ul li:last-child");
+
+  setCurrentProject(projectId);
+  setCurrentPage("project");
+  loadSelectedProject();
+  refreshSelectedCategoryDisplay(lastLi)
+}
+
 function initialAllTaskActiveClass() {
   const allTaskBtn = document.querySelector("#all-task-btn");
   refreshSelectedCategoryDisplay(allTaskBtn)
@@ -234,4 +243,4 @@ function initProjectsDisplay() {
   setCurrentPage("alltask");
 }
 
-export { initProjectsDisplay, loadProjectsList, clearMainWindow, changeHeaderName, loadTaskDom, updateUI };
+export { initProjectsDisplay, loadProjectsList, clearMainWindow, changeHeaderName, loadTaskDom, updateUI, loadNewAddedProject };

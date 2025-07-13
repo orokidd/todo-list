@@ -1,6 +1,6 @@
-import { getCurrentProject, getCurrentTodo, setCurrentForm, getCurrentForm } from "./state.js";
+import { getCurrentProject, setCurrentProject, getCurrentTodo, setCurrentForm, getCurrentForm, setCurrentPage } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
-import { loadProjectsList, updateUI } from "./interface.js";
+import { loadProjectsList, updateUI, loadNewAddedProject } from "./interface.js";
 
 function addProjectDialog() {
   const addProjectBtn = document.getElementById("newProjectBtn");
@@ -28,6 +28,7 @@ function projectSubmitListener() {
 
     newProject(newProjectId, projectName);
     loadProjectsList();
+    loadNewAddedProject(newProjectId)
   });
 }
 
