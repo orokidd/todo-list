@@ -124,7 +124,6 @@ function todoSubmitHandler(e) {
         priority: document.getElementById("taskPriority").value,
         completed: false,
       };
-
       newTodo(projectId, task);
     }
     updateUI();

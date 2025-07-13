@@ -96,6 +96,14 @@ body {
   color: rgb(103, 103, 103);
 }
 
+.project-delete {
+  opacity: 0;
+}
+/* display delete button on hover and when there is an active class on .project */
+.project:hover .project-delete, .project.active .project-delete {
+  opacity: 1;
+}
+
 /* Main Body */
 .main-body {
   flex: 1;

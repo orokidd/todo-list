@@ -34,7 +34,7 @@ function loadProjectsList() {
 function projectsListHandler(e, project) {
   setCurrentProject(project.id);
   setCurrentPage("project")
-  loadSelectedProject();
+  updateUI();
   refreshSelectedCategoryDisplay(e.target)
 }
 
@@ -47,8 +47,8 @@ function deleteProjectHandler(event) {
 function allTaskListener() {
   const allTaskBtn = document.querySelector("#all-task-btn");
   allTaskBtn.addEventListener("click", (e) => {
-    loadAllTask();
     setCurrentPage("alltask");
+    updateUI();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
@@ -56,8 +56,8 @@ function allTaskListener() {
 function todayTaskListener() {
   const todayTaskBtn = document.querySelector("#today-task-btn");
   todayTaskBtn.addEventListener("click", (e) => {
-    loadTodayTask();
     setCurrentPage("todaytask");
+    updateUI();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
@@ -65,8 +65,8 @@ function todayTaskListener() {
 function weekTaskListener() {
   const weekTaskBtn = document.querySelector("#week-task-btn");
   weekTaskBtn.addEventListener("click", (e) => {
-    loadThisWeekTask();
     setCurrentPage("weektask");
+    updateUI();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
@@ -74,8 +74,8 @@ function weekTaskListener() {
 function monthTaskListener() {
   const monthTaskBtn = document.querySelector("#month-task-btn");
   monthTaskBtn.addEventListener("click", (e) => {
-    loadThisMonthTask();
     setCurrentPage("monthtask");
+    updateUI();
     refreshSelectedCategoryDisplay(e.target)
   });
 }
