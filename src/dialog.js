@@ -1,4 +1,4 @@
-import { getCurrentTodo, setCurrentForm, getCurrentForm } from "./state.js";
+import { getCurrentProject, getCurrentTodo, setCurrentForm, getCurrentForm } from "./state.js";
 import { newProject, newTodo, getTodoData, editTodo } from "./todoData.js";
 import { loadProjectsList, updateUI } from "./interface.js";
 
@@ -37,8 +37,9 @@ function addTodoDialog() {
   const dialog = document.getElementById("todoDialog");
 
   addNewTodoBtn.addEventListener("click", () => {
-    loadProjectOptions()
     dialog.showModal();
+    loadProjectOptions();
+    selectDefaultProjectById(getCurrentProject());
     setCurrentForm("add");
   });
 
@@ -63,12 +64,23 @@ function loadProjectOptions() {
   });
 }
 
+function selectDefaultProjectById(projectId) {
+  const select = document.getElementById("taskProject");
+  const optionToSelect = Array.from(select.options).find(
+    option => option.id === projectId
+  );
+
+  if (optionToSelect) {
+    select.value = optionToSelect.value;
+  }
+}
+
 function initEditTodoDialog(todo) {
   const dialog = document.getElementById("todoDialog");
 
   dialog.showModal();
   setCurrentForm("edit");
-  hideProjectSelection()
+  hideProjectSelection();
 
   document.getElementById("taskTitle").value = todo.title;
   document.getElementById("taskDescription").value = todo.desc;
@@ -86,18 +98,19 @@ function todoSubmitHandler(e) {
   e.preventDefault();
   const dialog = document.getElementById("todoDialog");
   const form = document.getElementById("todoForm");
-  const currentTodoId = getCurrentTodo();
   const currentFormMode = getCurrentForm();
 
     if (currentFormMode === "edit") {
+      const currentTodoId = getCurrentTodo();
       const newTodo = {
-        id: currentTodoId,
+        id: crypto.randomUUID(),
         title: document.getElementById("taskTitle").value,
         desc: document.getElementById("taskDescription").value,
         dueDate: document.getElementById("taskDueDate").value,
         priority: document.getElementById("taskPriority").value,
         completed: document.getElementById("taskStatus").checked,
       };
+
       editTodo(currentTodoId, newTodo);
     } else {
       const projectSelect = document.getElementById("taskProject");
@@ -110,6 +123,7 @@ function todoSubmitHandler(e) {
         priority: document.getElementById("taskPriority").value,
         completed: false,
       };
+
       newTodo(projectId, task);
     }
     updateUI();
