@@ -79,6 +79,8 @@ body {
 .project {
   display: flex;
   justify-content: space-between;
+
+  background-color: #f6f6f6;
 }
 
 .sidebar-project-header {
@@ -174,6 +176,10 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.todo-item.completed {
+  opacity: 70%;
+}
+
 .task-data {
   flex: 1;
 }
@@ -229,34 +235,18 @@ body {
 }
 
 .task-actions input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
 }
 
-.task-actions button {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+.task-actions svg {
+  width: 18px;
+  color: #646464;
 }
 
-#edit-task-button {
-  background: #f1f5f9;
-  color: #475569;
-}
-
-#edit-task-button:hover {
-  background: #e2e8f0;
-  color: #334155;
-}
-
-#delete-task-button {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-#delete-task-button:hover {
-  background: #fecaca;
-  color: #b91c1c;
+.task-actions svg:hover {
+  color: #262626;
 }
 
 /* Dialog Styles */
