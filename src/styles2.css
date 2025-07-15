@@ -42,13 +42,29 @@ body {
 
 .sidebar h1 {
   font-size: 1.75rem;
-  margin-bottom: 2rem;
   color: #4b5648;
 }
 
 .sidebar h2 {
   font-size: 1.2rem;
   color: #3a3a3a;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: 1.4rem;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu svg {
+  width: 24px;
+  color: #4b5648;
 }
 
 /* Date Section */
@@ -69,6 +85,11 @@ body {
 .category.active, .project.active {
   background: rgb(91, 98, 85);
   color: white;
+}
+
+/* Mobile show-hide */
+.date.hide, .projects.hide {
+  display: none;
 }
 
 /* Projects Section */
@@ -361,6 +382,10 @@ dialog input[type="checkbox"] {
     width: 100%;
     justify-content: space-between;
   }
+
+  .mobile-menu {
+  display: block;
+}
 }
 
 /* Animations */

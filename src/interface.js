@@ -221,24 +221,39 @@ function changeHeaderName(name) {
   projectName.textContent = name;
 }
 
-function showAddTaskButton() {
-  const addTaskBtn = document.querySelector("#newTodoBtn");
-  addTaskBtn.style.display = "inline";
-}
-
-function hideAddTaskButton() {
-  const addTaskBtn = document.querySelector("#newTodoBtn");
-  addTaskBtn.style.display = "none";
-}
-
 function clearMainWindow() {
   const tasksList = document.querySelector(".main-tasks");
   tasksList.innerHTML = "";
 }
 
-// function initialLoad() {
-  
-// }
+function mobileMenuListener() {
+  const toggleButton = document.querySelector(".mobile-menu");
+  const category = document.querySelector(".date");
+  const projects = document.querySelector(".projects")
+
+  toggleButton.addEventListener("click", () => {
+    category.classList.toggle("hide");
+    projects.classList.toggle("hide");
+  });
+}
+
+// to prevent the menus still hidden when resizing to desktop viewport
+function mobileResetOnResize(breakpoint = 768) {
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > breakpoint) {
+      const category = document.querySelector(".date");
+      const projects = document.querySelector(".projects")
+
+      if (category.classList.contains("hide")) {
+        category.classList.remove("hide");
+      }
+
+      if (projects.classList.contains("hide")) {
+        projects.classList.remove("hide");
+      }
+    }
+  });
+}
 
 function initProjectsDisplay() {
   loadProjectsList();
@@ -249,6 +264,8 @@ function initProjectsDisplay() {
   loadAllTask();
   initialAllTaskActiveClass();
   setCurrentPage("alltask");
+  mobileMenuListener();
+  mobileResetOnResize();
 }
 
 export { initProjectsDisplay, loadProjectsList, clearMainWindow, changeHeaderName, loadTaskDom, updateUI, loadNewAddedProject };
