@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+<script defer src="main.js"></script></head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Todo List</h1>
+                <button class="mobile-menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                </button>
+            </div>
+            <div class="date">
+                <ul class="todos-category">
+                    <li id="all-task-btn" class="category">📆 All Task</li>
+                    <li id="today-task-btn" class="category">📑 Today</li>
+                    <li id="week-task-btn" class="category">📇 This Week</li>
+                    <li id="month-task-btn" class="category">📊 This Month</li>
+                </ul>
+            </div>
+            <div class="projects">
+                <div class="sidebar-project-header">
+                    <h2>Projects</h2>
+                    <button id="newProjectBtn">+</button>
+                </div>
+                <ul class="projects-ul">
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="top">
+                <div class="header-left">All Tasks</div>
+                <div class="header-actions">
+                    <button id="newTodoBtn">Add Todo</button>
+                </div>
+            </div>
+            <div class="tasks-wrapper">
+                <ul class="main-tasks">
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- Dialog box for adding a project -->
+        <dialog id="newProjectDialog">
+            <form method="dialog">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" name="projectName" required>
+
+                <menu>
+                    <button type="submit" id="projectSubmitBtn">Submit</button>
+                    <button type="button" id="closeProjectBtn">Cancel</button>
+                </menu>
+            </form>
+        </dialog>
+
+
+        <!-- Dialog box for adding a task -->
+        <dialog id="todoDialog">
+            <form method="dialog" id="todoForm">
+                <label for="taskTitle">Title:</label>
+                <input type="text" id="taskTitle" name="taskTitle" required>
+
+                <label for="taskDescription">Description:</label>
+                <textarea id="taskDescription" name="taskDescription" rows="3" required></textarea>
+
+                <label for="taskDueDate">Due Date:</label>
+                <input type="date" id="taskDueDate" name="taskDueDate" required>
+
+                <label for="taskPriority" id="task-project-label">Project:</label>
+                <select id="taskProject" name="taskProject" required>
+                    <option value="default" selected>Select a project</option>
+                </select>
+
+                <label for="taskPriority">Priority:</label>
+                <select id="taskPriority" name="taskPriority" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <input type="checkbox" name="taskStatus" id="taskStatus">
+
+                <menu>
+                    <button type="submit">Submit</button>
+                    <button type="button" id="cancelTodo">Cancel</button>
+                </menu>
+            </form>
+        </dialog>
+
+    </div>
+
+</body>
+
+</html>
