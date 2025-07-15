@@ -35,7 +35,6 @@ body {
 .sidebar {
   width: 280px;
   background-color: #ffffff;
-  color: rgb(0, 0, 0);
   padding: 2rem 1.5rem;
   border-right: 1px solid #e2e8f0;
 }
@@ -47,7 +46,6 @@ body {
 
 .sidebar h2 {
   font-size: 1.2rem;
-  color: #3a3a3a;
 }
 
 .sidebar-header {
@@ -55,7 +53,7 @@ body {
   justify-content: space-between;
   align-items: center;
 
-  padding-bottom: 1.4rem;
+  margin-bottom: 1.4rem;
 }
 
 .mobile-menu {
@@ -120,11 +118,26 @@ body {
 }
 
 .project-delete {
+  /* to center the svg */
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+
   opacity: 0;
+  color: #747474;
 }
+
+.project-delete svg {
+  width: 18px;
+}
+
 /* display delete button on hover and when there is an active class on .project */
 .project:hover .project-delete, .project.active .project-delete {
   opacity: 1;
+}
+
+.project.active .project-delete {
+  color: #cccccc;
 }
 
 /* Main Body */

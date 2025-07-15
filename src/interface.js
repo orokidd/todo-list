@@ -21,7 +21,7 @@ function loadProjectsList() {
     projectList.textContent = project.name;
 
     deleteProjButton.classList.add("project-delete");
-    deleteProjButton.textContent = "X"
+    deleteProjButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`
 
     projectList.addEventListener("click", (event) => projectsListHandler(event, project))
     deleteProjButton.addEventListener("click", deleteProjectHandler)
@@ -39,9 +39,12 @@ function projectsListHandler(e, project) {
 }
 
 function deleteProjectHandler(event) {
+  const delButton = event.target.parentElement
+  const projectDiv = delButton.parentElement
+
   event.stopPropagation();
-  deleteProject(event.target.parentElement.id);
-  event.target.parentElement.remove();
+  deleteProject(projectDiv.id);
+  projectDiv.remove();
 }
 
 function allTaskListener() {

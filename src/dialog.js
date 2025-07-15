@@ -23,8 +23,7 @@ function projectSubmitListener() {
   projectSubmitBtn.addEventListener("click", () => {
     const projectInput = document.querySelector("#projectName");
     const projectName = projectInput.value;
-    const todoData = getTodoData();
-    const newProjectId = `p${todoData.length + 1}`;
+    const newProjectId = crypto.randomUUID();
 
     newProject(newProjectId, projectName);
     loadProjectsList();
