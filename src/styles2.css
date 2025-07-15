@@ -198,7 +198,7 @@ body {
 }
 
 .todo-item.completed {
-  opacity: 70%;
+  opacity: 60%;
 }
 
 .task-data {
