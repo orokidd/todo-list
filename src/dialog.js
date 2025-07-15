@@ -38,6 +38,7 @@ function addTodoDialog() {
   const dialog = document.getElementById("todoDialog");
 
   addNewTodoBtn.addEventListener("click", () => {
+    clearForm();
     dialog.showModal();
     loadProjectOptions();
     selectDefaultProjectById(getCurrentProject());
@@ -78,16 +79,17 @@ function selectDefaultProjectById(projectId) {
 
 function initEditTodoDialog(todo) {
   const dialog = document.getElementById("todoDialog");
+  const formInput = getFormInput();
 
   dialog.showModal();
   setCurrentForm("edit");
   hideProjectSelection();
 
-  document.getElementById("taskTitle").value = todo.title;
-  document.getElementById("taskDescription").value = todo.desc;
-  document.getElementById("taskDueDate").value = todo.dueDate;
-  document.getElementById("taskPriority").value = todo.priority;
-  document.getElementById("taskStatus").checked = todo.completed;
+  formInput.title.value = todo.title;
+  formInput.desc.value = todo.desc;
+  formInput.dueDate.value = todo.dueDate;
+  formInput.priority.value = todo.priority;
+  formInput.completed.checked = todo.completed;
 }
 
 function todoSubmitListener() {
@@ -100,16 +102,17 @@ function todoSubmitHandler(e) {
   const dialog = document.getElementById("todoDialog");
   const form = document.getElementById("todoForm");
   const currentFormMode = getCurrentForm();
+  const formInput = getFormInput()
 
     if (currentFormMode === "edit") {
       const currentTodoId = getCurrentTodo();
       const newTodo = {
         id: crypto.randomUUID(),
-        title: document.getElementById("taskTitle").value,
-        desc: document.getElementById("taskDescription").value,
-        dueDate: document.getElementById("taskDueDate").value,
-        priority: document.getElementById("taskPriority").value,
-        completed: document.getElementById("taskStatus").checked,
+        title: formInput.title.value,
+        desc: formInput.desc.value,
+        dueDate: formInput.dueDate.value,
+        priority: formInput.priority.value,
+        completed: formInput.completed.checked,
       };
 
       editTodo(currentTodoId, newTodo);
@@ -118,10 +121,10 @@ function todoSubmitHandler(e) {
       const projectId = projectSelect.options[projectSelect.selectedIndex].id;
       const task = {
         id: crypto.randomUUID(),
-        title: document.getElementById("taskTitle").value,
-        desc: document.getElementById("taskDescription").value,
-        dueDate: document.getElementById("taskDueDate").value,
-        priority: document.getElementById("taskPriority").value,
+        title: formInput.title.value,
+        desc: formInput.desc.value,
+        dueDate: formInput.dueDate.value,
+        priority: formInput.priority.value,
         completed: false,
       };
       newTodo(projectId, task);
@@ -145,6 +148,25 @@ function showProjectSelection() {
 
   projectSelect.style.display = "block"
   projectSelectLabel.style.display = "block"
+}
+
+function getFormInput() {
+  return {
+    title: document.getElementById("taskTitle"),
+    desc: document.getElementById("taskDescription"),
+    dueDate: document.getElementById("taskDueDate"),
+    priority: document.getElementById("taskPriority"),
+    completed: document.getElementById("taskStatus")
+  }
+}
+
+function clearForm() {
+  const formInput = getFormInput()
+
+  formInput.title.value = "",
+  formInput.desc.value = "",
+  formInput.dueDate.value = "",
+  formInput.priority.value = "low"
 }
 
 function initDialogListeners() {
